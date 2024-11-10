@@ -10,7 +10,7 @@ export default function projects() {
           <Link href="https://resuma-builder-milestone-2.vercel.app/">
           
             <div>
-              <img src="/p-1.png" width="400" height="100" />
+              <Image alt="Picture of the project1" src="/p-1.png" width="400" height="100" />
             </div>
 
             <div className="text-blue-800 font-medium text-[20px]">
@@ -30,7 +30,7 @@ export default function projects() {
         <div className="bg-slate-500 w-80 h-96 py-10 px-10 ">
           <Link href="https://class-6-project-pakwheels-web.vercel.app/">
             <div>
-              <img src="/p-2.png" width="500" height="100" />
+              <Image alt="Picture of the Project2" src="/p-2.png" width="500" height="100" />
             </div>
             <div className="text-blue-800 font-medium text-[20px]">
               Car selling and buying website
@@ -51,7 +51,7 @@ export default function projects() {
           <Link href="https://class-5-project-lxul.vercel.app/?__vercel_draft=1">
           
             <div>
-              <img src="/p-3.png" width="500"height="100" />
+              <Image alt="Picture of the project3" src="/p-3.png" width="500"height="100" />
 
             </div>
             <div className="text-blue-800 font-medium text-[20px]">
