@@ -1,3 +1,4 @@
+import Image from "next/image"
 export default function Hero() {
   return (
     <div>
@@ -12,7 +13,7 @@ export default function Hero() {
             <p>I'm passionate about exploring Generative AI and large language models, combining my interest in AI with hands-on skills in Python, JavaScript, TypeScript, HTML, and CSS. Currently, I'm diving into Next.js to expand my web development toolkit and further prepare for a future of creating innovative, tech-driven solutions.</p>
           </div>
 
-            <img src="/mypic.jpg" alt="" width="400" className="py-20 px-20  " />
+            <Image src="/mypic.jpg" alt="" width="400" className="py-20 px-20  " />
         
         </div>
     </div>
