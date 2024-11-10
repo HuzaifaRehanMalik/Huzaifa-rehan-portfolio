@@ -4,7 +4,7 @@ export default function Navebar(){
     return(
         <div className="flex justify-between py-1 px-20 bg-white text-black">
             <div className="font-extrabold  rounded-xl  ">
-            <Image alt="logo" src=".\logo of huzi.png" width="60" height="50" className="rounded-full" />
+            <Image alt="logo" src="\logo of huzi.png" width="60" height="50" className="rounded-full" />
                
             </div>
             <div className="flex justify-center items-center font-bold">
