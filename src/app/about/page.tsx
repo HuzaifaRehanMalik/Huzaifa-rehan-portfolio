@@ -27,10 +27,10 @@ export default function About() {
                     <div className="max-w-3xl text-center lg:text-left">
                         <h2 className="text-[40px] font-bold mb-6">Introduction</h2>
                         <p className="text-lg leading-7 font-medium mb-6">
-                            I'm a Computer Science student at the University of Karachi, pursuing an ADS (Associate Degree in Science) in Computer Science. 
+                            I&apos;m a Computer Science student at the University of Karachi, pursuing an ADS (Associate Degree in Science) in Computer Science. 
                             My passion lies in exploring the realms of Generative AI and large language models. 
                             I combine my interest in AI with hands-on skills in Python, JavaScript, TypeScript, HTML, and CSS. 
-                            Currently, I'm diving into Next.js to expand my web development toolkit and prepare for a future of creating innovative, tech-driven solutions.
+                            Currently, I&apos;m diving into Next.js to expand my web development toolkit and prepare for a future of creating innovative, tech-driven solutions.
                         </p>
 
                         <div className="py-5">
