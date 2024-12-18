@@ -21,9 +21,9 @@ export default function projects() {
             </p>
             <div className="flex justify-evenly">
 
-              <div className="bg-gray-600 ">Html</div>
-              <div className="bg-blue-500">CSS</div>
-              <div className="bg-yellow-500">Javascript</div>
+              <div className="bg-gray-600 px-2 rounded-full ">Html</div>
+              <div className="bg-blue-500 px-2 rounded-full">CSS</div>
+              <div className="bg-yellow-500 px-2 rounded-full">Javascript</div>
             </div>
           </Link>
         </div>
@@ -40,9 +40,9 @@ export default function projects() {
             </p>
             <div className="flex justify-evenly">
 
-              <div className="bg-black ">Next.js</div>
-              <div className="bg-blue-800">tailwind CSS</div>
-              <div className="bg-zinc-600">React.js</div>
+              <div className="bg-black  px-2 rounded-full">Next.js</div>
+              <div className="bg-blue-800 px-2 rounded-full">tailwind CSS</div>
+              <div className="bg-zinc-600 px-2 rounded-full">React.js</div>
             </div>
           
           </Link>
@@ -60,11 +60,11 @@ export default function projects() {
             <p>
               This is my first web site using tailwind css.
             </p>
-            <div className="flex justify-evenly">
+            <div className="flex justify-evenly ">
 
-              <div className="bg-black ">Next.js</div>
-              <div className="bg-blue-800">tailwind CSS</div>
-              <div className="bg-zinc-600">React.js</div>
+              <div className="bg-black px-2 rounded-full ">Next.js</div>
+              <div className="bg-blue-800 px-2 rounded-full">tailwind CSS</div>
+              <div className="bg-zinc-600 px-2 rounded-full">React.js</div>
             </div>
           </Link>
 
