@@ -10,7 +10,7 @@ export default function About() {
                 <meta name="description" content="Learn more about me, my journey in Computer Science, and my passion for AI and web development." />
             </Head>
 
-            <div className="bg-gray-900 text-white min-h-screen p-10">
+            <div className=" text-white min-h-screen p-10">
                 <h1 className="text-center text-[60px] font-extrabold mb-10">ABOUT ME</h1>
 
                 <div className="flex flex-col lg:flex-row justify-center items-center gap-10 py-10 px-10">
@@ -20,7 +20,6 @@ export default function About() {
                             alt="A professional headshot of me"
                             width={400}
                             height={400}
-                            className="rounded-full shadow-lg"
                         />
                     </div>
 
