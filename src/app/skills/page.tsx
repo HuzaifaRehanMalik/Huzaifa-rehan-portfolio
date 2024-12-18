@@ -4,7 +4,7 @@ export default function skils() {
         <div className="grid md:grid-cols-2 gap-20 items-center">
           <div>
             <h2 className="text-4xl md:text-5xl">Technologies I work with</h2>
-            <p className="text-gray-500 pt-2">I work with a range of technologies that combine web development fundamentals with advanced AI tools. My expertise includes programming languages like Python, JavaScript, and TypeScript, alongside frontend development skills in HTML, CSS, and Next.js. I'm also delving into Generative AI, particularly large language models, to explore innovative applications in tech. This diverse stack allows me to create dynamic, user-centered solutions while staying on the cutting edge of AI advancements.</p>
+            <p className="text-gray-500 pt-2">I work with a range of technologies that combine web development fundamentals with advanced AI tools. My expertise includes programming languages like Python, JavaScript, and TypeScript, alongside frontend development skills in HTML, CSS, and Next.js. I&apos;m also delving into Generative AI, particularly large language models, to explore innovative applications in tech. This diverse stack allows me to create dynamic, user-centered solutions while staying on the cutting edge of AI advancements.</p>
           </div>
           <div>
             <div className="grid grid-cols-2 text-accent text-3xl sm-text-4xl">
