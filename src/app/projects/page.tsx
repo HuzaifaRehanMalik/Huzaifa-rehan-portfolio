@@ -20,7 +20,7 @@ const projects = [
     title: "Full-featured E-commerce Store",
     description: "A complete e-commerce solution with product pages, a shopping cart, and user authentication built with modern web technologies.",
     image: "/p-4.png",
-    url: "https://class-5-project-lxul.vercel.app/?__vercel_draft=1",
+    url: "https://marketplace-builder-hackathon-omega.vercel.app/",
     techStack: ["Next.js", "Tailwind CSS", "React.js"],
   },
 ];
