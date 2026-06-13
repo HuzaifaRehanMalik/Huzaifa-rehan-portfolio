@@ -13,9 +13,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
-        <Navebar / >
+    <html lang="en" className="scroll-smooth">
+      <body className="site-shell text-white antialiased">
+        <Navebar />
         {children}
         <Footer />
       </body>
