@@ -1,5 +1,6 @@
 import type {
   ExpertiseCategory,
+  FooterNavItem,
   NavItem,
   Project,
   Service,
