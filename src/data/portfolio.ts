@@ -20,9 +20,7 @@ export const profile = {
   logo: "/logo.jpg",
   logoAlt: "logo",
   heroTitle: "I'm Huzaifa Rehan",
-  heroDescription:
-    `I am a Software Developer and aspiring AI Engineer passionate about building intelligent, scalable, and user-centric digital solutions. My expertise spans modern web development and Artificial Intelligence, with a strong focus on Generative AI, Large Language Models (LLMs), Retrieval-Augmented Generation (RAG), and Agentic AI systems. Using technologies such as Python, JavaScript, TypeScript, React, Next.js, HTML, and CSS, I develop high-performance applications that solve real-world problems and deliver exceptional user experiences. I am continuously expanding my knowledge in AI Engineering, multi-agent systems, and full-stack development, with the goal of creating innovative products that bridge the gap between cutting-edge technology and practical business needs.`
-,
+  heroDescription: "I build AI-powered web apps that work in production. From Python-driven RAG pipelines and multi-agent systems to full-stack Next.js products.",
   image: "/mypic.jpg",
   imageAlt: "My pic",
 } as const;
