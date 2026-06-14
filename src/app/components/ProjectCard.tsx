@@ -8,20 +8,17 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <Link
-      href={project.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="reveal group flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.06] shadow-2xl shadow-black/20 backdrop-blur transition duration-300 hover:-translate-y-2 hover:border-emerald-300/50 hover:bg-white/[0.09]"
-    >
+    <div className="reveal group flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.06] shadow-2xl shadow-black/20 backdrop-blur transition duration-300 hover:-translate-y-2 hover:border-emerald-300/50 hover:bg-white/[0.09]">
       <div className="overflow-hidden">
-        <Image
-          alt={`Screenshot of ${project.title}`}
-          src={project.image}
-          width={700}
-          height={430}
-          className="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-105"
-        />
+        <a href={project.url} target="_blank" rel="noopener noreferrer">
+          <Image
+            alt={`Screenshot of ${project.title}`}
+            src={project.image}
+            width={700}
+            height={430}
+            className="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-105"
+          />
+        </a>
       </div>
       <div className="flex flex-1 flex-col p-6">
         <h3 className="text-xl font-bold text-white">{project.title}</h3>
@@ -38,7 +35,29 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             </span>
           ))}
         </div>
+
+        <div className="mt-6 flex gap-3">
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center rounded-full bg-emerald-400 px-4 py-2 text-sm font-semibold text-black transition hover:bg-emerald-300"
+          >
+            Live Demo
+          </a>
+
+          {project.repo ? (
+            <a
+              href={project.repo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-full border border-white/10 bg-black/20 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:bg-white/5"
+            >
+              Code Base
+            </a>
+          ) : null}
+        </div>
       </div>
-    </Link>
+    </div>
   );
 }

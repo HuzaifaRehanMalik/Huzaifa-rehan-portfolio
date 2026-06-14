@@ -129,6 +129,7 @@ export const projects: Project[] = [
       "Built a modern full-stack Todo App with RAG-powered AI chatbot integration, enabling users to organize, track, and manage daily tasks efficiently through a responsive, intuitive, and productivity-focused interface.",
     image: "/Todo_app.png",
     url: "https://todoappwithwebuichatbotphase3.vercel.app/",
+    repo: "https://github.com/HuzaifaRehanMalik/todo_app_with_web_ui_chatbot_phase_3",
     techStack: ["Next.js", "React.js", "Tailwind CSS", "TypeScript", "Prisma", "PostgreSQL"],
   },
   {
@@ -137,6 +138,7 @@ export const projects: Project[] = [
       "A comprehensive guide to Physical AI and Humanoid Robotics, covering intelligent perception, autonomous decision-making, robot control, and real-world applications of embodied AI systems.",
     image: "/My_ai_Book.png",
     url: "https://book-humanoid-robotics-hackathon-website-22j1nlfrq.vercel.app/",
+    repo: "https://github.com/HuzaifaRehanMalik/Book-Humanoid-Robotics-hackathon",
     techStack: [
       "React.js",
       "Docusaurus",
@@ -154,6 +156,7 @@ export const projects: Project[] = [
       "An interactive platform where users can generate polished, professional resumes by inputting their information in a structured form.",
     image: "/p-1.png",
     url: "https://resuma-builder-milestone-2.vercel.app/",
+    repo: "https://github.com/HuzaifaRehanMalik/Resuma_builder_Milestone_2",
     techStack: ["HTML", "CSS", "JavaScript"],
   },
   {
@@ -162,6 +165,7 @@ export const projects: Project[] = [
       "A responsive website for buying and selling vehicles, inspired by platforms like PakWheels, featuring listings, filters, and user-friendly navigation.",
     image: "/p-2.png",
     url: "https://class-6-project-pakwheels-web.vercel.app/",
+    repo: "https://github.com/HuzaifaRehanMalik/class_6_project-pakwheels_web",
     techStack: ["Next.js", "Tailwind CSS", "React.js"],
   },
   {
@@ -170,6 +174,7 @@ export const projects: Project[] = [
       "A complete e-commerce solution with product pages, a shopping cart, and user authentication built with modern web technologies.",
     image: "/p-4.png",
     url: "https://marketplace-builder-hackathon-omega.vercel.app/",
+    repo: "https://github.com/HuzaifaRehanMalik/Marketplace_Builder_Hackathon",
     techStack: ["Next.js", "Tailwind CSS", "React.js"],
   },
 ];
