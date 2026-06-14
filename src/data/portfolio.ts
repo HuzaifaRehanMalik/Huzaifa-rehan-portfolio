@@ -209,7 +209,6 @@ export const socialLinks: SocialLink[] = [
 
 export const footerNavItems: FooterNavItem[] = [
   { label: "Home", href: "/#home" },
-  { label: "About", href: "/#about" },
   { label: "Projects", href: "/#projects" },
   { label: "Services", href: "/#services" },
   { label: "Technologies", href: "/#skills" },

@@ -110,9 +110,6 @@ export default function Footer() {
           <div className="mt-12 border-t border-white/10 pt-8">
             <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
               <div className="space-y-2 text-slate-300">
-                <p className="text-sm uppercase tracking-[0.28em] text-slate-500">
-                  Final Call to Action
-                </p>
                 <p className="text-base text-white/90">
                   {footerContent.title}
                 </p>
