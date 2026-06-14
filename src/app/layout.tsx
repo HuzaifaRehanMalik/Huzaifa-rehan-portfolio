@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Huzaifa Rehan — AI Engineer & Full-Stack Developer",
+  title: "Huzaifa Rehan",
   description:
     "I build AI-powered web apps, RAG pipelines, and multi-agent systems using Python, TypeScript, and Next.js.",
   icons: {
