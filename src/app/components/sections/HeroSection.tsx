@@ -17,7 +17,7 @@ export default function HeroSection() {
           <h1 className="mt-5 max-w-4xl text-5xl font-black leading-[0.95] text-white sm:text-7xl lg:text-8xl">
             {profile.heroTitle}
           </h1>
-          <p className="mt-8 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
+          <p className="mt-8 max-w-2xl text-lg leading-8 text-slate-300">
             {profile.heroDescription}
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
