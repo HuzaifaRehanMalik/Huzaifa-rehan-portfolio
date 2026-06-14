@@ -20,6 +20,15 @@ export default function HeroSection() {
           <p className="mt-8 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
             {profile.heroDescription}
           </p>
+          <div className="mt-10 flex flex-wrap gap-4">
+            <a
+              href="/cv.pdf"
+              download
+              className="inline-flex items-center justify-center rounded-full bg-emerald-400 px-6 py-3 text-sm font-semibold text-black transition hover:bg-emerald-300"
+            >
+              Download CV
+            </a>
+          </div>
         </div>
 
         <div className="reveal relative mx-auto w-full max-w-[440px] lg:max-w-[520px]">
