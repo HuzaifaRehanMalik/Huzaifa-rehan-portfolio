@@ -1,5 +1,6 @@
 import Navebar from "./components/Navebar";
 import Footer from "./components/Footer";
+import Chatbot from "@/components/chatbot/Chatbot";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -30,6 +31,7 @@ export default function RootLayout({
         <Navebar />
         {children}
         <Footer />
+        <Chatbot />
       </body>
     </html>
   );
