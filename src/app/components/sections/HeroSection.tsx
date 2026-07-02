@@ -37,10 +37,10 @@ export default function HeroSection() {
             <Image
               src={profile.image}
               alt={profile.imageAlt}
-              width={620}
-              height={720}
+              width={1254}
+              height={1254}
               priority
-              className="aspect-[4/5] w-full "
+              className="aspect-square w-full rounded-2xl object-cover"
             />
           </div>
         </div>
