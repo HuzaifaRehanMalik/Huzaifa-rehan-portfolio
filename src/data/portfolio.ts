@@ -137,7 +137,7 @@ export const projects: Project[] = [
     description:
       "A comprehensive guide to Physical AI and Humanoid Robotics, covering intelligent perception, autonomous decision-making, robot control, and real-world applications of embodied AI systems.",
     image: "/My_ai_Book.png",
-    url: "https://book-humanoid-robotics-hackathon-website-22j1nlfrq.vercel.app/",
+    url: "https://book-humanoid-robotics-hackathon-we.vercel.app/",
     repo: "https://github.com/HuzaifaRehanMalik/Book-Humanoid-Robotics-hackathon",
     techStack: [
       "React.js",
