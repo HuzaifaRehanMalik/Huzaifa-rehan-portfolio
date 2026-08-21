@@ -105,11 +105,11 @@ export default function Chatbot() {
   return (
     <div className="fixed bottom-5 right-5 z-50 flex items-end sm:bottom-6 sm:right-6">
       {isOpen ? (
-        <section className="flex h-[min(680px,calc(100vh-2rem))] w-[calc(100vw-2.5rem)] max-w-[420px] flex-col overflow-hidden rounded-2xl border border-white/15 bg-slate-950/95 text-white shadow-2xl shadow-black/50 backdrop-blur-xl">
-          <header className="flex items-center justify-between border-b border-white/10 px-4 py-3">
+        <section className="flex h-[min(680px,calc(100vh-2rem))] w-[calc(100vw-2.5rem)] max-w-[420px] flex-col overflow-hidden rounded-lg border border-border bg-bg/95 text-text shadow-lg shadow-black/40 backdrop-blur-md">
+          <header className="flex items-center justify-between border-b border-border px-4 py-3">
             <div>
-              <p className="text-sm font-semibold">Portfolio Assistant</p>
-              <p className="text-xs text-emerald-200">RAG-powered answers</p>
+              <p className="font-display text-sm font-semibold">Portfolio Assistant</p>
+              <p className="font-mono text-[10px] uppercase tracking-widest text-teal">RAG-powered answers</p>
             </div>
             <div className="flex items-center gap-1">
               <button
@@ -120,7 +120,7 @@ export default function Chatbot() {
                   setMessages([]);
                   setError(null);
                 }}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full text-slate-300 transition hover:bg-white/10 hover:text-white"
+                className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-text-dim transition hover:bg-surface hover:text-text"
               >
                 <FiRefreshCcw aria-hidden="true" />
               </button>
@@ -129,7 +129,7 @@ export default function Chatbot() {
                 aria-label="Close assistant"
                 title="Close assistant"
                 onClick={() => setIsOpen(false)}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full text-slate-300 transition hover:bg-white/10 hover:text-white"
+                className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-text-dim transition hover:bg-surface hover:text-text"
               >
                 <FiX aria-hidden="true" />
               </button>
@@ -139,7 +139,7 @@ export default function Chatbot() {
           <div className="flex-1 overflow-y-auto px-4 py-4">
             {messages.length === 0 ? (
               <div className="space-y-4">
-                <p className="rounded-2xl border border-white/10 bg-white/[0.06] p-4 text-sm leading-6 text-slate-200">
+                <p className="rounded-lg border border-border bg-surface/60 p-4 text-sm leading-6 text-text-dim">
                   {welcomeText}
                 </p>
                 <div className="grid gap-2">
@@ -148,7 +148,7 @@ export default function Chatbot() {
                       key={question}
                       type="button"
                       onClick={() => void sendMessage(question)}
-                      className="rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2 text-left text-sm text-slate-200 transition hover:border-emerald-300/50 hover:bg-emerald-300/10"
+                      className="rounded-lg border border-border bg-bg/40 px-3 py-2 text-left font-mono text-xs text-text-dim transition hover:border-teal/40 hover:text-teal"
                     >
                       {question}
                     </button>
@@ -163,10 +163,10 @@ export default function Chatbot() {
                     className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
                   >
                     <div
-                      className={`max-w-[88%] rounded-2xl px-3.5 py-3 text-sm leading-6 ${
+                      className={`max-w-[88%] rounded-lg px-3.5 py-3 text-sm leading-6 ${
                         message.role === "user"
-                          ? "bg-emerald-400 text-slate-950"
-                          : "border border-white/10 bg-white/[0.06] text-slate-100"
+                          ? "border border-amber/30 bg-amber text-bg"
+                          : "border border-border bg-surface/60 text-text-dim"
                       }`}
                     >
                       {message.content ? (
@@ -177,7 +177,7 @@ export default function Chatbot() {
                             a: ({ children, ...props }) => (
                               <a
                                 {...props}
-                                className="font-semibold text-emerald-200 underline underline-offset-4"
+                                className="font-semibold text-teal underline underline-offset-4"
                                 target="_blank"
                                 rel="noreferrer"
                               >
@@ -187,13 +187,13 @@ export default function Chatbot() {
                             code: ({ className, children, ...props }) => (
                               <code
                                 {...props}
-                                className={`${className ?? ""} rounded bg-black/30 px-1 py-0.5 text-[0.85em]`}
+                                className={`${className ?? ""} rounded bg-bg/50 px-1 py-0.5 font-mono text-[0.85em]`}
                               >
                                 {children}
                               </code>
                             ),
                             pre: ({ children }) => (
-                              <pre className="my-3 overflow-x-auto rounded-xl border border-white/10 bg-black/40 p-3 text-xs">
+                              <pre className="my-3 overflow-x-auto rounded-lg border border-border bg-bg/60 p-3 font-mono text-xs">
                                 {children}
                               </pre>
                             ),
@@ -203,16 +203,16 @@ export default function Chatbot() {
                         </ReactMarkdown>
                       ) : (
                         <span className="inline-flex gap-1">
-                          <span className="h-2 w-2 animate-bounce rounded-full bg-emerald-300" />
-                          <span className="h-2 w-2 animate-bounce rounded-full bg-emerald-300 [animation-delay:120ms]" />
-                          <span className="h-2 w-2 animate-bounce rounded-full bg-emerald-300 [animation-delay:240ms]" />
+                          <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-teal" />
+                          <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-teal [animation-delay:120ms]" />
+                          <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-teal [animation-delay:240ms]" />
                         </span>
                       )}
                     </div>
                   </div>
                 ))}
                 {error ? (
-                  <p className="rounded-xl border border-red-400/30 bg-red-500/10 px-3 py-2 text-sm text-red-100">
+                  <p className="rounded-lg border border-red-400/30 bg-red-500/10 px-3 py-2 text-sm text-red-100">
                     {error}
                   </p>
                 ) : null}
@@ -223,9 +223,9 @@ export default function Chatbot() {
 
           <form
             onSubmit={handleSubmit}
-            className="border-t border-white/10 bg-slate-950/80 p-3"
+            className="border-t border-border bg-bg/80 p-3"
           >
-            <div className="flex items-end gap-2 rounded-2xl border border-white/10 bg-white/[0.04] p-2">
+            <div className="flex items-end gap-2 rounded-lg border border-border bg-surface-2/60 p-2">
               <textarea
                 value={input}
                 onChange={(event) => setInput(event.target.value)}
@@ -237,14 +237,14 @@ export default function Chatbot() {
                 }}
                 rows={1}
                 placeholder="Ask about the portfolio..."
-                className="max-h-28 min-h-10 flex-1 resize-none bg-transparent px-2 py-2 text-sm text-white outline-none placeholder:text-slate-500"
+                className="max-h-28 min-h-10 flex-1 resize-none bg-transparent px-2 py-2 font-body text-sm text-text outline-none placeholder:text-text-faint"
               />
               <button
                 type="submit"
                 disabled={!canSend}
                 aria-label="Send message"
                 title="Send message"
-                className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-emerald-400 text-slate-950 transition hover:bg-emerald-300 disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-400"
+                className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-amber text-bg transition hover:bg-amber/85 disabled:cursor-not-allowed disabled:bg-surface-2 disabled:text-text-faint"
               >
                 <FiSend aria-hidden="true" />
               </button>
@@ -257,12 +257,11 @@ export default function Chatbot() {
           aria-label="Open portfolio assistant"
           title="Open portfolio assistant"
           onClick={() => setIsOpen(true)}
-          className="inline-flex h-14 w-14 items-center justify-center rounded-full border border-emerald-200/40 bg-emerald-400 text-slate-950 shadow-2xl shadow-emerald-950/40 transition hover:bg-emerald-300"
+          className="pulse-ring relative inline-flex h-12 w-12 items-center justify-center rounded-lg border border-amber/30 bg-amber text-bg shadow-lg shadow-amber/15 transition hover:bg-amber/85"
         >
-          <FiMessageCircle aria-hidden="true" className="h-6 w-6" />
+          <FiMessageCircle aria-hidden="true" className="h-5 w-5" />
         </button>
       )}
     </div>
   );
 }
-

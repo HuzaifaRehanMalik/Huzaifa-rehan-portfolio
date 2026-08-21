@@ -1,3 +1,5 @@
+"use client";
+
 import {
   FiCpu,
   FiDatabase,
@@ -8,6 +10,7 @@ import {
 } from "react-icons/fi";
 import type { IconType } from "react-icons";
 import type { Service, ServiceIcon } from "@/types/portfolio";
+import { useInViewport } from "@/hooks/useInViewport";
 
 const serviceIcons: Record<ServiceIcon, IconType> = {
   ai: FiCpu,
@@ -23,21 +26,27 @@ interface ServiceCardProps {
 }
 
 export default function ServiceCard({ service }: ServiceCardProps) {
+  const { ref, inView } = useInViewport<HTMLElement>();
   const Icon = serviceIcons[service.icon];
 
   return (
-    <article className="reveal group relative flex h-full min-h-[260px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.06] p-6 shadow-2xl shadow-black/20 backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:border-emerald-300/50 hover:bg-white/[0.09] sm:p-7">
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/60 to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
-      <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-emerald-300/10 blur-3xl transition duration-300 group-hover:bg-emerald-300/20" />
+    <article
+      ref={ref}
+      className={`group relative flex h-full min-h-[260px] flex-col overflow-hidden rounded-card border border-border bg-surface/60 p-6 transition-all duration-700 ease-out hover:border-teal/40 hover:bg-surface sm:p-7 ${
+        inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+      }`}
+    >
+      {/* Top accent line */}
+      <div className="absolute inset-x-0 top-0 h-px bg-border" />
 
-      <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl border border-emerald-300/25 bg-emerald-300/10 text-emerald-200 shadow-lg shadow-emerald-950/20 transition duration-300 group-hover:scale-105 group-hover:bg-emerald-300 group-hover:text-slate-950">
-        <Icon className="h-7 w-7" aria-hidden="true" />
+      <div className="relative flex h-12 w-12 items-center justify-center rounded-lg border border-teal/20 bg-teal/8 text-teal transition duration-300 group-hover:bg-teal/15">
+        <Icon className="h-6 w-6" aria-hidden="true" />
       </div>
 
-      <h3 className="relative mt-7 text-xl font-bold leading-tight text-white transition duration-300 group-hover:text-emerald-200 sm:text-2xl">
+      <h3 className="relative mt-7 font-display text-xl font-bold leading-tight text-text transition duration-300 group-hover:text-teal sm:text-2xl">
         {service.title}
       </h3>
-      <p className="relative mt-4 flex-1 text-sm leading-7 text-slate-300">
+      <p className="relative mt-4 flex-1 text-sm leading-7 text-text-dim">
         {service.description}
       </p>
     </article>

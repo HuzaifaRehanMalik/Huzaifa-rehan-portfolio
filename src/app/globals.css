@@ -20,13 +20,10 @@
   body {
     min-height: 100vh;
     margin: 0;
-    color: #fff;
-    background:
-      radial-gradient(circle at 20% 10%, rgba(16, 185, 129, 0.16), transparent 28rem),
-      radial-gradient(circle at 85% 18%, rgba(34, 211, 238, 0.1), transparent 24rem),
-      linear-gradient(180deg, #030712 0%, #050505 45%, #020617 100%);
+    color: #F4F1E9;
+    background: #090D18;
     font-family:
-      Inter,
+      var(--font-body),
       ui-sans-serif,
       system-ui,
       -apple-system,
@@ -45,6 +42,7 @@
     text-decoration: none;
   }
 
+  /* ── Vector-space coordinate grid ────────────────────────── */
   body::before {
     position: fixed;
     inset: 0;
@@ -52,15 +50,30 @@
     pointer-events: none;
     content: "";
     background-image:
-      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-    background-size: 64px 64px;
-    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), transparent 78%);
+      linear-gradient(rgba(35, 45, 80, 0.35) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(35, 45, 80, 0.35) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent 70%);
+  }
+
+  /* ── Node constellation dots — vector-search motif ──────── */
+  body::after {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    content: "";
+    background-image:
+      radial-gradient(circle, rgba(79, 217, 199, 0.22) 1.5px, transparent 1.5px),
+      radial-gradient(circle, rgba(242, 168, 61, 0.14) 1.5px, transparent 1.5px);
+    background-size: 80px 80px, 120px 120px;
+    background-position: 0 0, 40px 40px;
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent 55%);
   }
 
   ::selection {
-    color: #020617;
-    background: #6ee7b7;
+    color: #090D18;
+    background: #F2A83D;
   }
 
   a,
@@ -74,7 +87,7 @@
   button:focus-visible,
   input:focus-visible,
   textarea:focus-visible {
-    outline: 2px solid #6ee7b7;
+    outline: 2px solid #4FD9C7;
     outline-offset: 4px;
   }
 }
@@ -82,28 +95,157 @@
 @layer utilities {
   .site-shell {
     min-height: 100vh;
-    background:
-      radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.12), transparent 24rem),
-      radial-gradient(circle at 90% 10%, rgba(6, 182, 212, 0.1), transparent 22rem),
-      #020617;
+    background: #090D18;
   }
 
-  .reveal {
-    animation: reveal-up 0.75s ease both;
-    animation-timeline: view();
-    animation-range: entry 5% cover 32%;
+  /* ── Dot marker — timeline / list accent ────────────────── */
+  .dot-marker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .dot-marker::before {
+    flex-shrink: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #F2A83D;
+    content: "";
+    box-shadow: 0 0 6px rgba(242, 168, 61, 0.4);
+  }
+
+  /* ── Connecting line — architecture-flow motif ──────────── */
+  .connecting-line {
+    position: relative;
+  }
+
+  .connecting-line::before {
+    position: absolute;
+    left: 2px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, #232D50, rgba(35, 45, 80, 0.3));
+    content: "";
+  }
+
+  /* ── Node connector dot — flow diagram junction ─────────── */
+  .node-connector {
+    position: relative;
+  }
+
+  .node-connector::after {
+    position: absolute;
+    left: -4px;
+    top: 1.5rem;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1.5px solid #232D50;
+    background: #090D18;
+    content: "";
+  }
+
+  /* ── Orbit ring — animated dots around profile photo ────── */
+  .orbit-ring {
+    position: relative;
+  }
+
+  .orbit-ring::before,
+  .orbit-ring::after {
+    position: absolute;
+    inset: -16px;
+    border-radius: 50%;
+    content: "";
+    pointer-events: none;
+  }
+
+  .orbit-ring::before {
+    border: 1px dashed rgba(35, 45, 80, 0.6);
+    animation: orbit-spin 30s linear infinite;
+    background-image:
+      radial-gradient(circle at 50% 0%, #F2A83D 3px, transparent 3px),
+      radial-gradient(circle at 100% 50%, #4FD9C7 2.5px, transparent 2.5px),
+      radial-gradient(circle at 50% 100%, #F2A83D 2.5px, transparent 2.5px),
+      radial-gradient(circle at 0% 50%, #4FD9C7 3px, transparent 3px);
+  }
+
+  .orbit-ring::after {
+    inset: -28px;
+    border: 1px dashed rgba(35, 45, 80, 0.35);
+    animation: orbit-spin 45s linear infinite reverse;
+    background-image:
+      radial-gradient(circle at 85% 15%, #4FD9C7 2px, transparent 2px),
+      radial-gradient(circle at 15% 85%, #F2A83D 2px, transparent 2px),
+      radial-gradient(circle at 85% 85%, #4FD9C7 2px, transparent 2px),
+      radial-gradient(circle at 15% 15%, #F2A83D 2px, transparent 2px);
+  }
+
+  /* ── Section label — mono uppercase ─────────────────────── */
+  .section-label {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: #F2A83D;
+  }
+
+  /* ── Active nav dot ─────────────────────────────────────── */
+  .nav-dot-active::after {
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #F2A83D;
+    box-shadow: 0 0 8px rgba(242, 168, 61, 0.5);
+    content: "";
+  }
+
+  /* ── Pulse dot — FAB animation ──────────────────────────── */
+  .pulse-ring::before {
+    position: absolute;
+    inset: -4px;
+    border-radius: inherit;
+    border: 1.5px solid rgba(242, 168, 61, 0.4);
+    animation: pulse-ring-anim 2s ease-out infinite;
+    content: "";
+    pointer-events: none;
   }
 }
 
-@keyframes reveal-up {
-  from {
-    opacity: 0;
-    transform: translateY(28px);
-  }
+/* ── Keyframes ────────────────────────────────────────────── */
 
+@keyframes orbit-spin {
+  from {
+    transform: rotate(0deg);
+  }
   to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-ring-anim {
+  0% {
     opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.35);
+  }
+}
+
+@keyframes float-node {
+  0%, 100% {
     transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
   }
 }
 

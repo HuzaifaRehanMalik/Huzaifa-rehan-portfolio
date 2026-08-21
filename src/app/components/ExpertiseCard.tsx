@@ -1,3 +1,5 @@
+"use client";
+
 import {
   FiBox,
   FiCpu,
@@ -6,9 +8,9 @@ import {
   FiLayers,
   FiServer,
 } from "react-icons/fi";
-import type { CSSProperties } from "react";
 import type { IconType } from "react-icons";
 import type { ExpertiseCategory, ExpertiseIcon } from "@/types/portfolio";
+import { useInViewport } from "@/hooks/useInViewport";
 
 const expertiseIcons: Record<ExpertiseIcon, IconType> = {
   ai: FiCpu,
@@ -25,27 +27,29 @@ interface ExpertiseCardProps {
 }
 
 export default function ExpertiseCard({ category, index }: ExpertiseCardProps) {
+  const { ref, inView } = useInViewport<HTMLElement>();
   const Icon = expertiseIcons[category.icon];
 
   return (
     <article
-      className="reveal group relative flex h-full min-h-[250px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.06] p-5 shadow-2xl shadow-black/20 backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:border-emerald-300/50 hover:bg-white/[0.09] sm:p-6"
-      style={{ animationDelay: `${index * 90}ms` } as CSSProperties}
+      ref={ref}
+      className={`node-connector group relative flex h-full min-h-[250px] flex-col overflow-hidden rounded-card border border-border bg-surface/60 p-5 transition-all duration-700 ease-out hover:border-amber/40 hover:bg-surface sm:p-6 ${
+        inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+      }`}
     >
-      <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-emerald-300/20 via-transparent to-cyan-300/15 opacity-0 transition duration-300 group-hover:opacity-100" />
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/70 to-transparent" />
-      <div className="absolute -right-16 -top-16 h-36 w-36 rounded-full bg-cyan-300/10 blur-3xl transition duration-300 group-hover:bg-emerald-300/20" />
+      {/* Top accent line */}
+      <div className="absolute inset-x-0 top-0 h-px bg-border" />
 
       <div className="relative flex items-start justify-between gap-4">
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-emerald-300/25 bg-emerald-300/10 text-emerald-200 shadow-lg shadow-emerald-950/20 transition duration-300 group-hover:scale-105 group-hover:bg-emerald-300 group-hover:text-slate-950">
-          <Icon className="h-6 w-6" aria-hidden="true" />
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-amber/20 bg-amber/8 text-amber transition duration-300 group-hover:bg-amber/15">
+          <Icon className="h-5 w-5" aria-hidden="true" />
         </div>
-        <span className="rounded-full border border-white/10 bg-black/25 px-3 py-1 text-xs font-semibold text-slate-300">
+        <span className="font-mono text-[10px] font-semibold tracking-widest text-text-faint">
           0{index + 1}
         </span>
       </div>
 
-      <h3 className="relative mt-6 text-xl font-bold leading-tight text-white transition duration-300 group-hover:text-emerald-200">
+      <h3 className="relative mt-6 font-display text-xl font-bold leading-tight text-text transition duration-300 group-hover:text-amber">
         {category.title}
       </h3>
 
@@ -53,7 +57,7 @@ export default function ExpertiseCard({ category, index }: ExpertiseCardProps) {
         {category.skills.map((skill) => (
           <span
             key={skill}
-            className="rounded-full border border-white/10 bg-black/30 px-3 py-1.5 text-xs font-semibold text-slate-200 transition duration-300 group-hover:border-emerald-300/30 group-hover:bg-emerald-300/10"
+            className="dot-marker rounded border border-border bg-bg/60 px-3 py-1.5 text-xs font-medium text-text-dim transition duration-300 group-hover:border-amber/20 group-hover:text-text"
           >
             {skill}
           </span>

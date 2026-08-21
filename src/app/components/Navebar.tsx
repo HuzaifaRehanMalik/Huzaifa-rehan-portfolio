@@ -62,7 +62,7 @@ export default function Navebar() {
   };
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-black/55 text-white shadow-lg shadow-black/20 backdrop-blur-2xl">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-bg/90 text-text backdrop-blur-md">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 sm:px-8 lg:px-12">
         <Link
           href="/#home"
@@ -75,11 +75,11 @@ export default function Navebar() {
             alt={profile.logoAlt}
             width={52}
             height={52}
-            className="h-12 w-12 rounded-full border border-white/20 object-cover transition duration-300 group-hover:scale-105"
+            className="h-10 w-10 rounded-full border border-border object-cover transition duration-300 group-hover:border-amber/50"
           />
         </Link>
 
-        <div className="hidden items-center gap-1 rounded-full border border-white/10 bg-white/[0.06] p-1 font-bold md:flex">
+        <div className="hidden items-center gap-8 md:flex">
           {navItems.map((item) => {
             const isActive = activeSection === item.id;
 
@@ -88,10 +88,10 @@ export default function Navebar() {
                 key={item.id}
                 href={item.href}
                 onClick={(event) => handleNavClick(event, item.id)}
-                className={`rounded-full px-4 py-2 text-sm transition duration-300 ${
+                className={`relative py-2 font-mono text-[11px] uppercase tracking-[0.2em] transition duration-300 ${
                   isActive
-                    ? "bg-emerald-300 text-black shadow-lg shadow-emerald-300/20"
-                    : "text-slate-300 hover:bg-white/10 hover:text-white"
+                    ? "text-amber nav-dot-active"
+                    : "text-text-dim hover:text-text"
                 }`}
               >
                 {item.label}
@@ -105,22 +105,22 @@ export default function Navebar() {
           aria-label="Toggle navigation menu"
           aria-expanded={isOpen}
           onClick={() => setIsOpen((open) => !open)}
-          className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.08] text-white transition hover:border-emerald-300/50 hover:bg-emerald-300/10 md:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-surface/60 text-text transition hover:border-amber/40 hover:text-amber md:hidden"
         >
           <span className="sr-only">Toggle navigation menu</span>
           <span className="relative h-4 w-5">
             <span
-              className={`absolute left-0 top-0 h-0.5 w-5 rounded-full bg-current transition ${
+              className={`absolute left-0 top-0 h-0.5 w-5 bg-current transition ${
                 isOpen ? "translate-y-[7px] rotate-45" : ""
               }`}
             />
             <span
-              className={`absolute left-0 top-[7px] h-0.5 w-5 rounded-full bg-current transition ${
+              className={`absolute left-0 top-[7px] h-0.5 w-5 bg-current transition ${
                 isOpen ? "opacity-0" : ""
               }`}
             />
             <span
-              className={`absolute left-0 top-[14px] h-0.5 w-5 rounded-full bg-current transition ${
+              className={`absolute left-0 top-[14px] h-0.5 w-5 bg-current transition ${
                 isOpen ? "-translate-y-[7px] -rotate-45" : ""
               }`}
             />
@@ -129,12 +129,12 @@ export default function Navebar() {
       </nav>
 
       <div
-        className={`grid border-t border-white/10 bg-black/80 px-5 backdrop-blur-xl transition-all duration-300 md:hidden ${
+        className={`grid border-t border-border/40 bg-bg/95 px-5 backdrop-blur-md transition-all duration-300 md:hidden ${
           isOpen ? "grid-rows-[1fr] py-3" : "grid-rows-[0fr] py-0"
         }`}
       >
         <div className="overflow-hidden">
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-1">
             {navItems.map((item) => {
               const isActive = activeSection === item.id;
 
@@ -143,10 +143,10 @@ export default function Navebar() {
                   key={item.id}
                   href={item.href}
                   onClick={(event) => handleNavClick(event, item.id)}
-                  className={`rounded-2xl px-4 py-3 text-center font-bold transition ${
+                  className={`border-l-2 px-4 py-2.5 font-mono text-[11px] uppercase tracking-[0.2em] transition ${
                     isActive
-                      ? "bg-emerald-300 text-black"
-                      : "text-slate-300 hover:bg-white/10 hover:text-white"
+                      ? "border-amber bg-amber/5 text-amber"
+                      : "border-transparent text-text-dim hover:border-border hover:text-text"
                   }`}
                 >
                   {item.label}

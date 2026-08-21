@@ -1,14 +1,24 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/types/portfolio";
+import { useInViewport } from "@/hooks/useInViewport";
 
 interface ProjectCardProps {
   project: Project;
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
+  const { ref, inView } = useInViewport<HTMLDivElement>();
+
   return (
-    <div className="reveal group flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.06] shadow-2xl shadow-black/20 backdrop-blur transition duration-300 hover:-translate-y-2 hover:border-emerald-300/50 hover:bg-white/[0.09]">
+    <div
+      ref={ref}
+      className={`group flex h-full flex-col overflow-hidden rounded-card border border-border bg-surface/60 transition-all duration-700 ease-out hover:border-teal/40 hover:bg-surface ${
+        inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+      }`}
+    >
       <div className="overflow-hidden">
         <a href={project.url} target="_blank" rel="noopener noreferrer">
           <Image
@@ -20,28 +30,28 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           />
         </a>
       </div>
-      <div className="flex flex-1 flex-col p-6">
-        <h3 className="text-xl font-bold text-white">{project.title}</h3>
-        <p className="mt-4 flex-1 text-sm leading-6 text-slate-300">
+      <div className="flex flex-1 flex-col border-t border-border p-5">
+        <h3 className="font-display text-lg font-bold text-text">{project.title}</h3>
+        <p className="mt-3 flex-1 text-sm leading-6 text-text-dim">
           {project.description}
         </p>
-        <div className="mt-6 flex flex-wrap gap-2">
+        <div className="mt-5 flex flex-wrap gap-2">
           {project.techStack.map((tech) => (
             <span
               key={tech}
-              className="rounded-full border border-white/10 bg-black/30 px-3 py-1 text-xs font-semibold text-slate-200"
+              className="dot-marker rounded border border-border bg-bg/60 px-3 py-1 text-xs font-medium text-text-dim"
             >
               {tech}
             </span>
           ))}
         </div>
 
-        <div className="mt-6 flex gap-3">
+        <div className="mt-5 flex gap-3">
           <a
             href={project.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-full bg-emerald-400 px-4 py-2 text-sm font-semibold text-black transition hover:bg-emerald-300"
+            className="inline-flex items-center justify-center rounded-lg bg-amber px-4 py-2 text-sm font-semibold text-bg transition hover:bg-amber/85"
           >
             Live Demo
           </a>
@@ -51,7 +61,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               href={project.repo}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-full border border-white/10 bg-black/20 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:bg-white/5"
+              className="inline-flex items-center justify-center rounded-lg border border-border bg-surface-2/60 px-4 py-2 text-sm font-semibold text-text-dim transition hover:border-teal/40 hover:text-text"
             >
               Code Base
             </a>

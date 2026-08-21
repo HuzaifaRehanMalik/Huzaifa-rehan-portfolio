@@ -1,21 +1,29 @@
+"use client";
+
 import ServiceCard from "@/app/components/ServiceCard";
 import { services, servicesContent } from "@/data/portfolio";
+import { useInViewport } from "@/hooks/useInViewport";
 
 export default function ServicesSection() {
+  const { ref, inView } = useInViewport<HTMLDivElement>();
+
   return (
     <section
       id="services"
       className="relative scroll-mt-24 px-5 py-24 sm:px-8 lg:px-12"
     >
-      <div className="absolute left-0 top-1/3 -z-10 h-72 w-72 rounded-full bg-cyan-400/10 blur-3xl" />
-      <div className="absolute bottom-10 right-0 -z-10 h-80 w-80 rounded-full bg-emerald-400/10 blur-3xl" />
-
       <div className="mx-auto max-w-7xl">
-        <div className="reveal mx-auto max-w-3xl text-center">
-          <h2 className="text-4xl font-black text-white sm:text-6xl">
+        <div
+          ref={ref}
+          className={`mx-auto max-w-3xl text-center transition-all duration-700 ease-out ${
+            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+          }`}
+        >
+          <span className="section-label">What I Build</span>
+          <h2 className="mt-4 font-display text-4xl font-black text-text sm:text-6xl">
             {servicesContent.title}
           </h2>
-          <p className="mt-6 text-sm leading-7 text-slate-400 sm:text-base">
+          <p className="mt-6 text-sm leading-7 text-text-dim sm:text-base">
             {servicesContent.description}
           </p>
         </div>
