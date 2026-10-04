@@ -18,17 +18,16 @@ Next.js portfolio with an embedded production-ready RAG assistant. The chatbot r
 
 - Node.js 22 or newer
 - Qdrant Cloud or a local Qdrant instance
-- An OpenAI-compatible chat and embeddings API
+- A Google Gemini API key (used for both chat and embeddings)
 
 ## Environment Variables
 
 Create `.env.local`:
 
 ```bash
-OPENAI_API_KEY=
-OPENAI_BASE_URL=
-MODEL_NAME=gpt-4.1-mini
-EMBEDDING_MODEL=text-embedding-3-small
+GEMINI_API_KEY=
+GEMINI_MODEL=gemini-3.5-flash
+EMBEDDING_MODEL=gemini-embedding-2
 QDRANT_URL=http://localhost:6333
 QDRANT_API_KEY=
 QDRANT_COLLECTION=portfolio_knowledge_base
@@ -36,7 +35,7 @@ RETRIEVAL_LIMIT=6
 INGEST_SECRET=
 ```
 
-`OPENAI_BASE_URL` is optional for OpenAI. Set it when using an OpenAI-compatible provider. The configured provider must support chat completions for the agent and embeddings for ingestion/retrieval.
+The OpenAI Agents SDK is the agent framework; both the agent model and embeddings run on Gemini through its OpenAI-compatible endpoint (`GEMINI_BASE_URL` overrides the default `https://generativelanguage.googleapis.com/v1beta/openai/`). No OpenAI key is needed. Changing `EMBEDDING_MODEL` to one with a different vector size makes the next ingestion recreate the Qdrant collection.
 
 ## Running Locally
 
@@ -79,8 +78,8 @@ The route reads the current portfolio source data, regenerates embeddings, recre
 
 ## Troubleshooting
 
-- Missing API key: check `OPENAI_API_KEY`.
-- Provider errors: confirm `OPENAI_BASE_URL`, `MODEL_NAME`, and `EMBEDDING_MODEL` are compatible with your provider.
+- Missing API key: check `GEMINI_API_KEY`.
+- Provider errors (404): Google retires older models; confirm `GEMINI_MODEL` and `EMBEDDING_MODEL` are still served.
 - Empty or weak answers: run `POST /api/ingest` after content changes.
 - Qdrant failures: verify `QDRANT_URL`, `QDRANT_API_KEY`, and collection permissions.
 - Runtime errors from the Agents SDK: confirm Node.js 22+ locally and in Vercel.

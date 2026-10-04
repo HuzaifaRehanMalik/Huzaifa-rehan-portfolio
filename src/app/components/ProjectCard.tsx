@@ -26,6 +26,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             src={project.image}
             width={700}
             height={430}
+            loading="eager"
             className="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-105"
           />
         </a>

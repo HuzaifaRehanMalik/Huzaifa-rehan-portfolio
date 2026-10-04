@@ -1,19 +1,20 @@
 import { Agent, OpenAIProvider, run, setDefaultModelProvider } from "@openai/agents";
-import { aiConfig, assertAiConfig } from "@/ai/config";
+import { aiConfig } from "@/ai/config";
+import { getGeminiClient } from "@/ai/gemini";
 import { portfolioAssistantInstructions } from "@/ai/instructions";
 import { searchPortfolio } from "@/ai/tools";
 
 let providerReady = false;
 
 function configureModelProvider() {
-  assertAiConfig();
+  const openAIClient = getGeminiClient();
 
   if (providerReady) return;
 
+  // Gemini via its OpenAI-compatible Chat Completions endpoint.
   setDefaultModelProvider(
     new OpenAIProvider({
-      apiKey: aiConfig.openAiApiKey,
-      baseURL: aiConfig.openAiBaseUrl,
+      openAIClient,
       useResponses: false,
     }),
   );

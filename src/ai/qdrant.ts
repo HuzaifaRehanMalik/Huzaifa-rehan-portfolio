@@ -65,10 +65,18 @@ async function qdrantRequest<T>(path: string, init: RequestInit): Promise<T> {
 
 export async function ensureCollection(vectorSize: number) {
   try {
-    await qdrantRequest(`/collections/${aiConfig.qdrantCollection}`, {
+    const data = await qdrantRequest<{
+      result: { config: { params: { vectors: { size?: number } } } };
+    }>(`/collections/${aiConfig.qdrantCollection}`, {
       method: "GET",
     });
-    return;
+
+    if (data.result.config.params.vectors.size === vectorSize) return;
+
+    // Embedding model changed dimensions; existing vectors are unusable.
+    await qdrantRequest(`/collections/${aiConfig.qdrantCollection}`, {
+      method: "DELETE",
+    });
   } catch (error) {
     const message = error instanceof Error ? error.message : "";
 

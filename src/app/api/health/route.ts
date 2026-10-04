@@ -13,8 +13,7 @@ export async function GET() {
     embeddingModel: aiConfig.embeddingModel,
     qdrantCollection: aiConfig.qdrantCollection,
     configured: {
-      openAiApiKey: Boolean(aiConfig.openAiApiKey),
-      openAiBaseUrl: Boolean(aiConfig.openAiBaseUrl),
+      geminiApiKey: Boolean(aiConfig.geminiApiKey),
       qdrantUrl: Boolean(aiConfig.qdrantUrl),
       qdrantApiKey: Boolean(aiConfig.qdrantApiKey),
     },

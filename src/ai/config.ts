@@ -1,8 +1,10 @@
 export const aiConfig = {
-  openAiApiKey: process.env.OPENAI_API_KEY ?? "",
-  openAiBaseUrl: process.env.OPENAI_BASE_URL,
-  modelName: process.env.MODEL_NAME ?? "gpt-4.1-mini",
-  embeddingModel: process.env.EMBEDDING_MODEL ?? "text-embedding-3-small",
+  geminiApiKey: process.env.GEMINI_API_KEY ?? "",
+  geminiBaseUrl:
+    process.env.GEMINI_BASE_URL ??
+    "https://generativelanguage.googleapis.com/v1beta/openai/",
+  modelName: process.env.GEMINI_MODEL ?? "gemini-3.5-flash",
+  embeddingModel: process.env.EMBEDDING_MODEL ?? "gemini-embedding-2",
   qdrantUrl: process.env.QDRANT_URL ?? "http://localhost:6333",
   qdrantApiKey: process.env.QDRANT_API_KEY,
   qdrantCollection:
@@ -13,11 +15,10 @@ export const aiConfig = {
 export function assertAiConfig() {
   const missing = [];
 
-  if (!aiConfig.openAiApiKey) missing.push("OPENAI_API_KEY");
+  if (!aiConfig.geminiApiKey) missing.push("GEMINI_API_KEY");
   if (!aiConfig.qdrantUrl) missing.push("QDRANT_URL");
 
   if (missing.length > 0) {
     throw new Error(`Missing required environment variables: ${missing.join(", ")}`);
   }
 }
-

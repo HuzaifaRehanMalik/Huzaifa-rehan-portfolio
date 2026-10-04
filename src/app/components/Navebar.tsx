@@ -75,6 +75,7 @@ export default function Navebar() {
             alt={profile.logoAlt}
             width={52}
             height={52}
+            loading="eager"
             className="h-10 w-10 rounded-full border border-border object-cover transition duration-300 group-hover:border-amber/50"
           />
         </Link>
