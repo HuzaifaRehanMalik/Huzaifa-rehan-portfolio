@@ -5,31 +5,28 @@ import {
   setDefaultModelProvider,
   setTracingDisabled,
 } from "@openai/agents";
-import { aiConfig, assertAiConfig } from "@/ai/config";
+import { aiConfig } from "@/ai/config";
+import { getGeminiClient } from "@/ai/gemini";
 import { portfolioAssistantInstructions } from "@/ai/instructions";
 import { searchPortfolio } from "@/ai/tools";
 
 let providerReady = false;
 
 function configureModelProvider() {
-  assertAiConfig();
+  const openAIClient = getGeminiClient();
 
   if (providerReady) return;
 
-  // The Agents SDK stays the framework; with Gemini it talks to Google's
-  // OpenAI-compatible Chat Completions endpoint instead of OpenAI.
+  // Gemini via its OpenAI-compatible Chat Completions endpoint.
   setDefaultModelProvider(
     new OpenAIProvider({
-      apiKey: aiConfig.apiKey,
-      baseURL: aiConfig.baseUrl,
+      openAIClient,
       useResponses: false,
     }),
   );
 
-  // Trace export goes to OpenAI's platform and needs an OpenAI key, so skip it for Gemini.
-  if (aiConfig.provider !== "openai") {
-    setTracingDisabled(true);
-  }
+  // Trace export goes to OpenAI's platform and needs an OpenAI key, which this setup doesn't use.
+  setTracingDisabled(true);
 
   providerReady = true;
 }

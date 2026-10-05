@@ -80,7 +80,6 @@ export async function ingestPortfolioKnowledge() {
     documents: documents.length,
     chunks: chunks.length,
     collection: aiConfig.qdrantCollection,
-    provider: aiConfig.provider,
     embeddingModel: aiConfig.embeddingModel,
     vectorSize,
   };
