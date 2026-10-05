@@ -2,6 +2,11 @@ import { Readable } from "node:stream";
 import { streamPortfolioAssistantResponse } from "@/ai/agent";
 
 export const runtime = "nodejs";
+// Agent replies need two Gemini calls plus retrieval; the old 10s default cut them off.
+export const maxDuration = 60;
+
+// Stop slightly before Vercel's hard limit so the client gets an error it can show.
+const replyTimeoutMs = 55_000;
 
 interface ChatMessage {
   role: "user" | "assistant";
@@ -29,7 +34,11 @@ export async function POST(request: Request) {
       return Response.json({ error: "At least one message is required." }, { status: 400 });
     }
 
-    const result = await streamPortfolioAssistantResponse(messages, request.signal);
+    const signal = AbortSignal.any([
+      request.signal,
+      AbortSignal.timeout(replyTimeoutMs),
+    ]);
+    const result = await streamPortfolioAssistantResponse(messages, signal);
     const stream = Readable.toWeb(
       result.toTextStream({ compatibleWithNodeStreams: true }),
     ) as ReadableStream<Uint8Array>;

@@ -39,6 +39,9 @@ export function createPortfolioAssistant() {
     model: aiConfig.modelName,
     instructions: portfolioAssistantInstructions,
     tools: [searchPortfolio],
+    modelSettings: {
+      reasoning: { effort: aiConfig.reasoningEffort },
+    },
   });
 }
 

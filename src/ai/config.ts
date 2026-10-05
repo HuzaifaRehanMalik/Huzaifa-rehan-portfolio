@@ -5,6 +5,12 @@ export const aiConfig = {
     "https://generativelanguage.googleapis.com/v1beta/openai/",
   modelName: process.env.GEMINI_MODEL ?? "gemini-3.5-flash",
   embeddingModel: process.env.EMBEDDING_MODEL ?? "gemini-embedding-2",
+  // Lower thinking effort keeps replies inside the serverless time limit.
+  reasoningEffort: (process.env.GEMINI_REASONING_EFFORT ?? "low") as
+    | "minimal"
+    | "low"
+    | "medium"
+    | "high",
   qdrantUrl: process.env.QDRANT_URL ?? "http://localhost:6333",
   qdrantApiKey: process.env.QDRANT_API_KEY,
   qdrantCollection:

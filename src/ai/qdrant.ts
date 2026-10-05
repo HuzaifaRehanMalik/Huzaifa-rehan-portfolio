@@ -174,13 +174,20 @@ export async function updateVector(point: PortfolioVectorPoint) {
 
 export async function checkQdrantConnection() {
   try {
-    await qdrantRequest(`/collections/${aiConfig.qdrantCollection}`, {
+    const data = await qdrantRequest<{
+      result?: {
+        points_count?: number;
+        config?: { params?: { vectors?: { size?: number } } };
+      };
+    }>(`/collections/${aiConfig.qdrantCollection}`, {
       method: "GET",
     });
 
     return {
       reachable: true,
       collectionExists: true,
+      vectorSize: data.result?.config?.params?.vectors?.size ?? null,
+      points: data.result?.points_count ?? null,
     };
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown Qdrant error";
