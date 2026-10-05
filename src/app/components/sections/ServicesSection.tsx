@@ -1,36 +1,28 @@
-"use client";
-
+import Reveal from "@/components/Reveal";
 import ServiceCard from "@/app/components/ServiceCard";
 import { services, servicesContent } from "@/data/portfolio";
-import { useInViewport } from "@/hooks/useInViewport";
 
 export default function ServicesSection() {
-  const { ref, inView } = useInViewport<HTMLDivElement>();
-
   return (
     <section
       id="services"
-      className="relative scroll-mt-24 px-5 py-24 sm:px-8 lg:px-12"
+      className="scroll-mt-24 bg-surface px-4 py-20 sm:px-8 lg:px-12 lg:py-28"
     >
       <div className="mx-auto max-w-7xl">
-        <div
-          ref={ref}
-          className={`mx-auto max-w-3xl text-center transition-all duration-700 ease-out ${
-            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-          }`}
-        >
-          <span className="section-label">What I Build</span>
-          <h2 className="mt-4 font-display text-4xl font-black text-text sm:text-6xl">
+        <Reveal className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-end lg:gap-16">
+          <h2 className="max-w-[14ch] font-display text-4xl font-extrabold leading-[1] tracking-headline text-text sm:text-6xl">
             {servicesContent.title}
           </h2>
-          <p className="mt-6 text-sm leading-7 text-text-dim sm:text-base">
+          <p className="max-w-[46ch] text-lg leading-8 text-text-dim">
             {servicesContent.description}
           </p>
-        </div>
+        </Reveal>
 
-        <div className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {services.map((service) => (
-            <ServiceCard key={service.title} service={service} />
+        <div className="mt-14 grid grid-cols-1 gap-x-10 gap-y-12 md:grid-cols-2 xl:grid-cols-3">
+          {services.map((service, index) => (
+            <Reveal key={service.title} delay={(index % 3) * 100}>
+              <ServiceCard service={service} />
+            </Reveal>
           ))}
         </div>
       </div>

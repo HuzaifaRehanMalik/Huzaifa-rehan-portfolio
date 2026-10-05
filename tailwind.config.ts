@@ -9,44 +9,59 @@ export default {
         padding: "15px",
       },
       colors: {
-        bg: "#090D18",
-        surface: "#121A2E",
-        "surface-2": "#1A2340",
-        border: "#232D50",
-        "border-soft": "#181F3A",
-        text: "#F4F1E9",
-        "text-dim": "#93A0C4",
-        "text-faint": "#7885B3",
-        amber: "#F2A83D",
-        teal: "#4FD9C7",
+        // Palette shared with HRM Solution (hrmsolution.vercel.app)
+        bg: "#060B10",
+        surface: "#0A1218",
+        "surface-raised": "#0F1A22",
+        border: "#22343F",
+        "border-soft": "#16222B",
+        text: "#E6EEF1",
+        "text-dim": "#8A9BA5",
+        "text-faint": "#6F818C",
+        accent: "#58D5DB",
+        "accent-deep": "#2AA9B4",
+        "accent-ink": "#04191C",
+        "accent-soft": "#0F2A30",
+        brand: "#287B83",
+        live: "#00BB7F",
       },
       fontFamily: {
-        display: ["var(--font-display)", "system-ui", "sans-serif"],
-        body: ["var(--font-body)", "system-ui", "sans-serif"],
+        display: ["var(--font-sans)", "system-ui", "sans-serif"],
+        body: ["var(--font-sans)", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
-      borderRadius: {
-        card: "0.5rem",
-      },
-      animation: {
-        orbit: "orbit-spin 30s linear infinite",
-        "orbit-reverse": "orbit-spin 45s linear infinite reverse",
-        "pulse-dot": "pulse-ring-anim 2s ease-out infinite",
-        "float-node": "float-node 4s ease-in-out infinite",
+      letterSpacing: {
+        headline: "-0.045em",
       },
       keyframes: {
-        "orbit-spin": {
-          from: { transform: "rotate(0deg)" },
-          to: { transform: "rotate(360deg)" },
+        rise: {
+          from: { opacity: "0", transform: "translateY(14px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
         },
-        "pulse-ring-anim": {
-          "0%": { opacity: "1", transform: "scale(1)" },
-          "100%": { opacity: "0", transform: "scale(1.35)" },
+        "word-rise": {
+          from: { opacity: "0", transform: "translateY(105%)" },
+          to: { opacity: "1", transform: "translateY(0)" },
         },
-        "float-node": {
+        drift: {
+          "0%, 100%": { transform: "translate(0, 0) scale(1)" },
+          "50%": { transform: "translate(80px, 40px) scale(1.15)" },
+        },
+        float: {
           "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-6px)" },
+          "50%": { transform: "translateY(-10px)" },
         },
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
+        },
+      },
+      animation: {
+        rise: "rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both",
+        "word-rise": "word-rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both",
+        drift: "drift 18s ease-in-out infinite",
+        "drift-reverse": "drift 22s ease-in-out infinite reverse",
+        float: "float 6s ease-in-out infinite",
+        marquee: "marquee 40s linear infinite",
       },
     },
   },

@@ -1,4 +1,5 @@
 import { createHash } from "crypto";
+import { aiConfig } from "@/ai/config";
 import { embedTexts } from "@/ai/embeddings";
 import {
   deletePortfolioVectors,
@@ -78,6 +79,9 @@ export async function ingestPortfolioKnowledge() {
   return {
     documents: documents.length,
     chunks: chunks.length,
-    collection: process.env.QDRANT_COLLECTION ?? "portfolio_knowledge_base",
+    collection: aiConfig.qdrantCollection,
+    provider: aiConfig.provider,
+    embeddingModel: aiConfig.embeddingModel,
+    vectorSize,
   };
 }

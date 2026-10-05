@@ -9,12 +9,13 @@ export async function GET() {
   return Response.json({
     ok: true,
     service: "portfolio-rag-chatbot",
+    provider: aiConfig.provider,
     model: aiConfig.modelName,
     embeddingModel: aiConfig.embeddingModel,
     qdrantCollection: aiConfig.qdrantCollection,
     configured: {
-      openAiApiKey: Boolean(aiConfig.openAiApiKey),
-      openAiBaseUrl: Boolean(aiConfig.openAiBaseUrl),
+      apiKey: Boolean(aiConfig.apiKey),
+      baseUrl: Boolean(aiConfig.baseUrl),
       qdrantUrl: Boolean(aiConfig.qdrantUrl),
       qdrantApiKey: Boolean(aiConfig.qdrantApiKey),
     },

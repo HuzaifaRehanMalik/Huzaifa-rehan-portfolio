@@ -8,18 +8,23 @@ function getOpenAiClient() {
 
   if (!openAiClient) {
     openAiClient = new OpenAI({
-      apiKey: aiConfig.openAiApiKey,
-      baseURL: aiConfig.openAiBaseUrl,
+      apiKey: aiConfig.apiKey,
+      baseURL: aiConfig.baseUrl,
     });
   }
 
   return openAiClient;
 }
 
+function dimensionsParam() {
+  return aiConfig.embeddingDimensions ? { dimensions: aiConfig.embeddingDimensions } : {};
+}
+
 export async function embedText(input: string): Promise<number[]> {
   const response = await getOpenAiClient().embeddings.create({
     model: aiConfig.embeddingModel,
     input,
+    ...dimensionsParam(),
   });
 
   const embedding = response.data[0]?.embedding;
@@ -37,6 +42,7 @@ export async function embedTexts(inputs: string[]): Promise<number[][]> {
   const response = await getOpenAiClient().embeddings.create({
     model: aiConfig.embeddingModel,
     input: inputs,
+    ...dimensionsParam(),
   });
 
   return response.data.map((item) => item.embedding);

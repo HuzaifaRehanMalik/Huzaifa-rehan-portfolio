@@ -4,6 +4,7 @@ import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 import remarkGfm from "remark-gfm";
+import { ASK_ASSISTANT_EVENT, type AskAssistantDetail } from "@/lib/assistant";
 import {
   FiRefreshCcw,
   FiSend,
@@ -45,6 +46,20 @@ export default function Chatbot() {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isLoading]);
 
+  // Keep a handle on the latest sendMessage so the window listener never sends with stale history.
+  const sendRef = useRef<(prompt: string) => Promise<void>>(async () => {});
+
+  useEffect(() => {
+    function handleAsk(event: Event) {
+      const { question } = (event as CustomEvent<AskAssistantDetail>).detail ?? {};
+      setIsOpen(true);
+      if (question) void sendRef.current(question);
+    }
+
+    window.addEventListener(ASK_ASSISTANT_EVENT, handleAsk);
+    return () => window.removeEventListener(ASK_ASSISTANT_EVENT, handleAsk);
+  }, []);
+
   async function sendMessage(prompt: string) {
     const question = prompt.trim();
     if (!question || isLoading) return;
@@ -85,6 +100,10 @@ export default function Chatbot() {
           { role: "assistant", content: assistantText },
         ]);
       }
+
+      if (!assistantText.trim()) {
+        throw new Error("The assistant couldn't answer right now. Try again in a moment.");
+      }
     } catch (caughtError) {
       const message =
         caughtError instanceof Error
@@ -97,6 +116,10 @@ export default function Chatbot() {
     }
   }
 
+  useEffect(() => {
+    sendRef.current = sendMessage;
+  });
+
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (canSend) void sendMessage(input);
@@ -105,11 +128,11 @@ export default function Chatbot() {
   return (
     <div className="fixed bottom-5 right-5 z-50 flex items-end sm:bottom-6 sm:right-6">
       {isOpen ? (
-        <section className="flex h-[min(680px,calc(100vh-2rem))] w-[calc(100vw-2.5rem)] max-w-[420px] flex-col overflow-hidden rounded-lg border border-border bg-bg/95 text-text shadow-lg shadow-black/40 backdrop-blur-md">
+        <section className="flex h-[min(680px,calc(100vh-2rem))] w-[calc(100vw-2.5rem)] max-w-[420px] flex-col overflow-hidden rounded-[24px] border border-border bg-surface text-text shadow-[0_24px_60px_-24px_rgba(0,0,0,0.8)]">
           <header className="flex items-center justify-between border-b border-border px-4 py-3">
             <div>
-              <p className="font-display text-sm font-semibold">Portfolio Assistant</p>
-              <p className="font-mono text-[10px] uppercase tracking-widest text-teal">RAG-powered answers</p>
+              <p className="font-display text-base font-bold tracking-tight">Portfolio assistant</p>
+              <p className="text-xs text-text-dim">Answers from this portfolio's content</p>
             </div>
             <div className="flex items-center gap-1">
               <button
@@ -120,7 +143,7 @@ export default function Chatbot() {
                   setMessages([]);
                   setError(null);
                 }}
-                className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-text-dim transition hover:bg-surface hover:text-text"
+                className="inline-flex h-8 w-8 items-center justify-center rounded-full text-text-dim transition hover:bg-bg hover:text-text"
               >
                 <FiRefreshCcw aria-hidden="true" />
               </button>
@@ -129,7 +152,7 @@ export default function Chatbot() {
                 aria-label="Close assistant"
                 title="Close assistant"
                 onClick={() => setIsOpen(false)}
-                className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-text-dim transition hover:bg-surface hover:text-text"
+                className="inline-flex h-8 w-8 items-center justify-center rounded-full text-text-dim transition hover:bg-bg hover:text-text"
               >
                 <FiX aria-hidden="true" />
               </button>
@@ -139,7 +162,7 @@ export default function Chatbot() {
           <div className="flex-1 overflow-y-auto px-4 py-4">
             {messages.length === 0 ? (
               <div className="space-y-4">
-                <p className="rounded-lg border border-border bg-surface/60 p-4 text-sm leading-6 text-text-dim">
+                <p className="text-sm leading-6 text-text-dim">
                   {welcomeText}
                 </p>
                 <div className="grid gap-2">
@@ -148,7 +171,7 @@ export default function Chatbot() {
                       key={question}
                       type="button"
                       onClick={() => void sendMessage(question)}
-                      className="rounded-lg border border-border bg-bg/40 px-3 py-2 text-left font-mono text-xs text-text-dim transition hover:border-teal/40 hover:text-teal"
+                      className="rounded-xl border border-border px-3.5 py-2.5 text-left text-sm text-text transition hover:border-accent hover:text-accent"
                     >
                       {question}
                     </button>
@@ -163,10 +186,10 @@ export default function Chatbot() {
                     className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
                   >
                     <div
-                      className={`max-w-[88%] rounded-lg px-3.5 py-3 text-sm leading-6 ${
+                      className={`max-w-[88%] rounded-2xl px-3.5 py-2.5 text-sm leading-6 ${
                         message.role === "user"
-                          ? "border border-amber/30 bg-amber text-bg"
-                          : "border border-border bg-surface/60 text-text-dim"
+                          ? "bg-accent text-accent-ink"
+                          : "bg-surface-raised text-text"
                       }`}
                     >
                       {message.content ? (
@@ -177,7 +200,7 @@ export default function Chatbot() {
                             a: ({ children, ...props }) => (
                               <a
                                 {...props}
-                                className="font-semibold text-teal underline underline-offset-4"
+                                className="font-semibold text-accent underline underline-offset-4"
                                 target="_blank"
                                 rel="noreferrer"
                               >
@@ -187,13 +210,13 @@ export default function Chatbot() {
                             code: ({ className, children, ...props }) => (
                               <code
                                 {...props}
-                                className={`${className ?? ""} rounded bg-bg/50 px-1 py-0.5 font-mono text-[0.85em]`}
+                                className={`${className ?? ""} rounded bg-bg px-1 py-0.5 font-mono text-[0.85em]`}
                               >
                                 {children}
                               </code>
                             ),
                             pre: ({ children }) => (
-                              <pre className="my-3 overflow-x-auto rounded-lg border border-border bg-bg/60 p-3 font-mono text-xs">
+                              <pre className="my-3 overflow-x-auto rounded-xl border border-border bg-bg p-3 font-mono text-xs">
                                 {children}
                               </pre>
                             ),
@@ -203,16 +226,16 @@ export default function Chatbot() {
                         </ReactMarkdown>
                       ) : (
                         <span className="inline-flex gap-1">
-                          <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-teal" />
-                          <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-teal [animation-delay:120ms]" />
-                          <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-teal [animation-delay:240ms]" />
+                          <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-accent" />
+                          <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-accent [animation-delay:120ms]" />
+                          <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-accent [animation-delay:240ms]" />
                         </span>
                       )}
                     </div>
                   </div>
                 ))}
                 {error ? (
-                  <p className="rounded-lg border border-red-400/30 bg-red-500/10 px-3 py-2 text-sm text-red-100">
+                  <p className="rounded-xl border border-red-400/40 bg-red-500/10 px-3 py-2 text-sm text-red-200">
                     {error}
                   </p>
                 ) : null}
@@ -223,9 +246,9 @@ export default function Chatbot() {
 
           <form
             onSubmit={handleSubmit}
-            className="border-t border-border bg-bg/80 p-3"
+            className="border-t border-border p-3"
           >
-            <div className="flex items-end gap-2 rounded-lg border border-border bg-surface-2/60 p-2">
+            <div className="flex items-end gap-2 rounded-2xl border border-border bg-bg p-2 focus-within:border-accent">
               <textarea
                 value={input}
                 onChange={(event) => setInput(event.target.value)}
@@ -237,14 +260,14 @@ export default function Chatbot() {
                 }}
                 rows={1}
                 placeholder="Ask about the portfolio..."
-                className="max-h-28 min-h-10 flex-1 resize-none bg-transparent px-2 py-2 font-body text-sm text-text outline-none placeholder:text-text-faint"
+                className="max-h-28 min-h-10 flex-1 resize-none bg-transparent px-2 py-2 font-body text-sm text-text outline-none placeholder:text-text-faint focus-visible:outline-none"
               />
               <button
                 type="submit"
                 disabled={!canSend}
                 aria-label="Send message"
                 title="Send message"
-                className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-amber text-bg transition hover:bg-amber/85 disabled:cursor-not-allowed disabled:bg-surface-2 disabled:text-text-faint"
+                className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent text-accent-ink transition hover:bg-accent-deep disabled:cursor-not-allowed disabled:bg-border disabled:text-text-faint"
               >
                 <FiSend aria-hidden="true" />
               </button>
@@ -254,12 +277,12 @@ export default function Chatbot() {
       ) : (
         <button
           type="button"
-          aria-label="Open portfolio assistant"
           title="Open portfolio assistant"
           onClick={() => setIsOpen(true)}
-          className="pulse-ring relative inline-flex h-12 w-12 items-center justify-center rounded-lg border border-amber/30 bg-amber text-bg shadow-lg shadow-amber/15 transition hover:bg-amber/85"
+          className="inline-flex items-center gap-2 rounded-full bg-text py-3 pl-4 pr-5 text-sm font-semibold text-bg shadow-[0_12px_30px_-12px_rgba(0,0,0,0.8)] transition hover:bg-accent hover:text-accent-ink"
         >
           <FiMessageCircle aria-hidden="true" className="h-5 w-5" />
+          Ask me anything
         </button>
       )}
     </div>

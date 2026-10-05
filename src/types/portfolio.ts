@@ -23,6 +23,7 @@ export interface Project {
   url: string;
   repo?: string;
   techStack: string[];
+  featured?: boolean;
 }
 
 export type ExpertiseIcon =

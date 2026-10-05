@@ -19,15 +19,18 @@ export const profile = {
   name: "Huzaifa Rehan",
   logo: "/logo.jpg",
   logoAlt: "logo",
-  heroTitle: "I'm Huzaifa Rehan",
+  heroTitle: "I turn ideas into AI products that ship.",
+  role: "full-stack AI engineer",
   heroDescription: "I build AI-powered web apps that work in production. From Python-driven RAG pipelines and multi-agent systems to full-stack Next.js products.",
   image: "/mypic.jpg",
-  imageAlt: "My pic",
+  imageAlt: "Portrait of Huzaifa Rehan",
 } as const;
 
 export const skillsContent = {
   badge: "Tech Stack",
-  title: "Technologies & AI Expertise",
+  title: "Technologies & AI expertise",
+  intro:
+    "Software engineering and applied AI in one stack: Python and TypeScript underneath, LLMs, RAG, and agents on top.",
   description:
     "I build modern web applications and AI-powered solutions using a combination of full-stack development technologies and cutting-edge artificial intelligence tools. My expertise spans Python, TypeScript, React, Next.js, and modern frontend development, alongside Generative AI, Large Language Models (LLMs), Retrieval-Augmented Generation (RAG), AI Agents, APIs, and automation systems. This blend of software engineering and AI enables me to create scalable, intelligent, and user-focused digital experiences.",
 } as const;
@@ -124,12 +127,13 @@ export const services: Service[] = [
 
 export const projects: Project[] = [
   {
-    title: "Todo-app",
+    title: "Todo app with AI assistant",
     description:
       "Built a modern full-stack Todo App with RAG-powered AI chatbot integration, enabling users to organize, track, and manage daily tasks efficiently through a responsive, intuitive, and productivity-focused interface.",
     image: "/Todo_app.png",
     url: "https://todoappwithwebuichatbotphase3.vercel.app/",
     repo: "https://github.com/HuzaifaRehanMalik/todo_app_with_web_ui_chatbot_phase_3",
+    featured: true,
     techStack: ["Next.js", "React.js", "Tailwind CSS", "TypeScript", "Prisma", "PostgreSQL"],
   },
   {
@@ -139,6 +143,7 @@ export const projects: Project[] = [
     image: "/My_ai_Book.png",
     url: "https://book-humanoid-robotics-hackathon-we.vercel.app/",
     repo: "https://github.com/HuzaifaRehanMalik/Book-Humanoid-Robotics-hackathon",
+    featured: true,
     techStack: [
       "React.js",
       "Docusaurus",
@@ -180,17 +185,18 @@ export const projects: Project[] = [
 ];
 
 export const projectsContent = {
-  title: "Featured Projects",
+  title: "Selected projects",
+  intro: "Live products with their source code. The first two run real AI features.",
 } as const;
 
 export const contactContent = {
-  title: "Let's Build Something Great",
+  title: "Let's build something great",
   description: "Have a project, AI idea, or collaboration in mind? Reach out directly and let's turn it into a polished digital product.",
   emailLabel: "Email",
   email: "rehanhuzaifa035@gmail.com",
   linkedInLabel: "LinkedIn",
   linkedInDisplayName: "Huzaifa Rehan",
-  googleFormLabel: "Google Form",
+  googleFormLabel: "Project brief",
   googleFormHref: "https://forms.gle/n8X9NZKjUMsQqh499",
 } as const;
 
@@ -229,7 +235,7 @@ export const footerBranding = {
   role: "Software Developer & AI Engineer",
   description:
     "Building AI-powered applications, intelligent automation systems, and modern web experiences that solve real-world problems.",
-  status: "Open to New Opportunities",
+  status: "Open to new opportunities",
 } as const;
 
 export const footerContent = {

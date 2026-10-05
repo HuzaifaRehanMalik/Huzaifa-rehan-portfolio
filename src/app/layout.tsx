@@ -1,52 +1,88 @@
-import { Bricolage_Grotesque, Manrope, JetBrains_Mono } from "next/font/google";
+import { IBM_Plex_Mono, Schibsted_Grotesk } from "next/font/google";
 import Navebar from "./components/Navebar";
 import Footer from "./components/Footer";
 import Chatbot from "@/components/chatbot/Chatbot";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { profile } from "@/data/portfolio";
+import { siteDescription, siteKeywords, siteTitle, siteUrl } from "@/lib/site";
 import "./globals.css";
 
-const bricolage = Bricolage_Grotesque({
+const schibsted = Schibsted_Grotesk({
   subsets: ["latin"],
-  variable: "--font-display",
+  variable: "--font-sans",
   display: "swap",
 });
 
-const manrope = Manrope({
+const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
-  variable: "--font-body",
-  display: "swap",
-});
-
-const jetbrains = JetBrains_Mono({
-  subsets: ["latin"],
+  weight: ["400", "500"],
   variable: "--font-mono",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Huzaifa Rehan",
-  description:
-    "I build AI-powered web apps, RAG pipelines, and multi-agent systems using Python, TypeScript, and Next.js.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: siteTitle,
+    template: "%s | Huzaifa Rehan",
+  },
+  description: siteDescription,
+  keywords: siteKeywords,
+  applicationName: "Huzaifa Rehan Portfolio",
+  authors: [{ name: profile.name, url: siteUrl }],
+  creator: profile.name,
+  publisher: profile.name,
+  category: "technology",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "/",
+    siteName: "Huzaifa Rehan",
+    title: siteTitle,
+    description: siteDescription,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteDescription,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  verification: process.env.GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+    : undefined,
   icons: {
     icon: "/logo.jpg",
     shortcut: "/logo.jpg",
     apple: "/logo.jpg",
   },
 };
+
+export const viewport: Viewport = {
+  themeColor: "#060B10",
+  colorScheme: "dark",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`scroll-smooth ${bricolage.variable} ${manrope.variable} ${jetbrains.variable}`}>
-      <head>
-        <link rel="icon" type="image/svg+xml" href="/logo.jpg" />
-        <link rel="icon" href="/logo.jpg" />
-        <link rel="shortcut icon" href="/logo.jpg" />
-        <link rel="apple-touch-icon" href="/logo.jpg" />
-      </head>
-      <body className="site-shell font-body text-text antialiased">
+    <html lang="en" className={`scroll-smooth ${schibsted.variable} ${plexMono.variable}`}>
+      <body className="bg-bg font-body text-text antialiased">
         <Navebar />
         {children}
         <Footer />

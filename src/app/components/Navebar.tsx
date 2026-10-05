@@ -7,6 +7,7 @@ import type { MouseEvent } from "react";
 import { useCallback, useEffect, useState } from "react";
 import { navItems, profile } from "@/data/portfolio";
 import { useActiveSection } from "@/hooks/useActiveSection";
+import { askAssistant } from "@/lib/assistant";
 import type { NavSectionId } from "@/types/portfolio";
 
 export default function Navebar() {
@@ -62,43 +63,54 @@ export default function Navebar() {
   };
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-bg/90 text-text backdrop-blur-md">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 sm:px-8 lg:px-12">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-border/70 bg-bg/85 text-text backdrop-blur-md">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-8 lg:px-12">
         <Link
           href="/#home"
-          aria-label="Home"
-          className="group flex items-center gap-3"
+          aria-label={`${profile.name}, back to top`}
+          className="flex items-center gap-3"
           onClick={(event) => handleNavClick(event, "home")}
         >
           <Image
             src={profile.logo}
-            alt={profile.logoAlt}
+            alt=""
             width={52}
             height={52}
             loading="eager"
-            className="h-10 w-10 rounded-full border border-border object-cover transition duration-300 group-hover:border-amber/50"
+            className="h-9 w-9 rounded-full border border-border object-cover"
           />
+          <span className="font-display text-base font-bold tracking-tight">
+            {profile.name}
+          </span>
         </Link>
 
-        <div className="hidden items-center gap-8 md:flex">
-          {navItems.map((item) => {
+        <div className="hidden items-center gap-1 md:flex">
+          {navItems.slice(1).map((item) => {
             const isActive = activeSection === item.id;
 
             return (
               <Link
                 key={item.id}
                 href={item.href}
+                aria-current={isActive ? "true" : undefined}
                 onClick={(event) => handleNavClick(event, item.id)}
-                className={`relative py-2 font-mono text-[11px] uppercase tracking-[0.2em] transition duration-300 ${
+                className={`rounded-full px-4 py-2 text-sm font-medium transition ${
                   isActive
-                    ? "text-amber nav-dot-active"
-                    : "text-text-dim hover:text-text"
+                    ? "bg-text text-bg"
+                    : "text-text-dim hover:bg-surface hover:text-text"
                 }`}
               >
                 {item.label}
               </Link>
             );
           })}
+          <button
+            type="button"
+            onClick={() => askAssistant()}
+            className="ml-3 rounded-full bg-accent px-4 py-2 text-sm font-semibold text-accent-ink transition hover:bg-accent-deep"
+          >
+            Ask my assistant
+          </button>
         </div>
 
         <button
@@ -106,23 +118,22 @@ export default function Navebar() {
           aria-label="Toggle navigation menu"
           aria-expanded={isOpen}
           onClick={() => setIsOpen((open) => !open)}
-          className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-surface/60 text-text transition hover:border-amber/40 hover:text-amber md:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface text-text transition hover:border-text md:hidden"
         >
-          <span className="sr-only">Toggle navigation menu</span>
-          <span className="relative h-4 w-5">
+          <span className="relative h-3.5 w-4">
             <span
-              className={`absolute left-0 top-0 h-0.5 w-5 bg-current transition ${
-                isOpen ? "translate-y-[7px] rotate-45" : ""
+              className={`absolute left-0 top-0 h-0.5 w-4 bg-current transition ${
+                isOpen ? "translate-y-[6px] rotate-45" : ""
               }`}
             />
             <span
-              className={`absolute left-0 top-[7px] h-0.5 w-5 bg-current transition ${
+              className={`absolute left-0 top-[6px] h-0.5 w-4 bg-current transition ${
                 isOpen ? "opacity-0" : ""
               }`}
             />
             <span
-              className={`absolute left-0 top-[14px] h-0.5 w-5 bg-current transition ${
-                isOpen ? "-translate-y-[7px] -rotate-45" : ""
+              className={`absolute left-0 top-[12px] h-0.5 w-4 bg-current transition ${
+                isOpen ? "-translate-y-[6px] -rotate-45" : ""
               }`}
             />
           </span>
@@ -130,7 +141,7 @@ export default function Navebar() {
       </nav>
 
       <div
-        className={`grid border-t border-border/40 bg-bg/95 px-5 backdrop-blur-md transition-all duration-300 md:hidden ${
+        className={`grid border-t border-border/60 px-4 transition-all duration-300 md:hidden ${
           isOpen ? "grid-rows-[1fr] py-3" : "grid-rows-[0fr] py-0"
         }`}
       >
@@ -143,17 +154,27 @@ export default function Navebar() {
                 <Link
                   key={item.id}
                   href={item.href}
+                  tabIndex={isOpen ? 0 : -1}
                   onClick={(event) => handleNavClick(event, item.id)}
-                  className={`border-l-2 px-4 py-2.5 font-mono text-[11px] uppercase tracking-[0.2em] transition ${
-                    isActive
-                      ? "border-amber bg-amber/5 text-amber"
-                      : "border-transparent text-text-dim hover:border-border hover:text-text"
+                  className={`rounded-xl px-4 py-3 text-base font-medium transition ${
+                    isActive ? "bg-text text-bg" : "text-text-dim hover:bg-surface hover:text-text"
                   }`}
                 >
                   {item.label}
                 </Link>
               );
             })}
+            <button
+              type="button"
+              tabIndex={isOpen ? 0 : -1}
+              onClick={() => {
+                setIsOpen(false);
+                askAssistant();
+              }}
+              className="mt-2 rounded-xl bg-accent px-4 py-3 text-left text-base font-semibold text-accent-ink"
+            >
+              Ask my assistant
+            </button>
           </div>
         </div>
       </div>

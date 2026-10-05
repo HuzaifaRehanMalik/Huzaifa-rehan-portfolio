@@ -63,12 +63,24 @@ async function qdrantRequest<T>(path: string, init: RequestInit): Promise<T> {
   return response.json() as Promise<T>;
 }
 
+type CollectionInfo = {
+  result?: { config?: { params?: { vectors?: { size?: number } } } };
+};
+
 export async function ensureCollection(vectorSize: number) {
+  const collectionPath = `/collections/${aiConfig.qdrantCollection}`;
+
   try {
-    await qdrantRequest(`/collections/${aiConfig.qdrantCollection}`, {
+    const info = await qdrantRequest<CollectionInfo>(collectionPath, {
       method: "GET",
     });
-    return;
+    const existingSize = info.result?.config?.params?.vectors?.size;
+
+    if (existingSize === vectorSize) return;
+
+    // Switching embedding models (e.g. OpenAI -> Gemini) changes the vector size,
+    // so the collection is rebuilt; ingestion re-adds every portfolio chunk anyway.
+    await qdrantRequest(collectionPath, { method: "DELETE" });
   } catch (error) {
     const message = error instanceof Error ? error.message : "";
 
