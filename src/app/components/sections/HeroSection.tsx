@@ -185,7 +185,7 @@ export default function HeroSection() {
 
           <div className="mt-10 flex flex-wrap gap-x-6 gap-y-3 animate-rise text-sm font-semibold [animation-delay:840ms]">
             <a
-              href="/CV.pdf"
+              href="/cv.pdf"
               download
               className="inline-flex items-center gap-2 text-text underline decoration-border decoration-2 underline-offset-[6px] transition hover:decoration-accent"
             >

@@ -11,7 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       images: [`${siteUrl}/mypic.jpg`],
     },
     {
-      url: `${siteUrl}/CV.pdf`,
+      url: `${siteUrl}/cv.pdf`,
       lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 0.6,
