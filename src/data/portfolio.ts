@@ -127,6 +127,16 @@ export const services: Service[] = [
 
 export const projects: Project[] = [
   {
+    title: "Stockeyfy: Inventory management SaaS",
+    description:
+      "A production-grade inventory management SaaS with a real-time analytics dashboard, weighted moving average cost valuation, an auditable stock ledger, negative-stock protection, and secure authentication with email verification and session revocation.",
+    image: "/stockeyfy_login.png",
+    url: "https://inventory-system-ten-zeta.vercel.app/",
+    repo: "https://github.com/HuzaifaRehanMalik/inventory-system",
+    featured: true,
+    techStack: ["Next.js", "React.js", "TypeScript", "Tailwind CSS", "Auth.js", "Prisma", "PostgreSQL", "Zod"],
+  },
+  {
     title: "Todo app with AI assistant",
     description:
       "Built a modern full-stack Todo App with RAG-powered AI chatbot integration, enabling users to organize, track, and manage daily tasks efficiently through a responsive, intuitive, and productivity-focused interface.",
@@ -186,7 +196,7 @@ export const projects: Project[] = [
 
 export const projectsContent = {
   title: "Selected projects",
-  intro: "Live products with their source code. The first two run real AI features.",
+  intro: "Live products with their source code, from a production inventory SaaS to apps with real AI features.",
 } as const;
 
 export const contactContent = {
