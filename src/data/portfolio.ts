@@ -140,7 +140,7 @@ export const projects: Project[] = [
     title: "Todo app with AI assistant",
     description:
       "Built a modern full-stack Todo App with RAG-powered AI chatbot integration, enabling users to organize, track, and manage daily tasks efficiently through a responsive, intuitive, and productivity-focused interface.",
-    image: "/Todo_app.png",
+    image: "/todoify_home.jpg",
     url: "https://todoappwithwebuichatbotphase3.vercel.app/",
     repo: "https://github.com/HuzaifaRehanMalik/todo_app_with_web_ui_chatbot_phase_3",
     featured: true,
