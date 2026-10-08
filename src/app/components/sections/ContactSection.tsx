@@ -39,24 +39,24 @@ export default function ContactSection() {
   return (
     <section id="contact" className="scroll-mt-24 px-4 pb-8 sm:px-8 lg:px-12">
       <Reveal>
-        <div className="mx-auto grid max-w-7xl gap-12 rounded-[32px] bg-accent px-6 py-14 text-accent-ink sm:px-10 lg:grid-cols-[1fr_1fr] lg:gap-16 lg:px-16 lg:py-20">
-          <div>
-            <h2 className="max-w-[12ch] font-display text-5xl font-extrabold leading-[0.95] tracking-headline sm:text-7xl">
+        <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)] gap-10 overflow-hidden rounded-[32px] bg-accent px-5 py-12 text-accent-ink sm:gap-12 sm:px-10 sm:py-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16 lg:px-16 lg:py-20">
+          <div className="min-w-0">
+            <h2 className="max-w-[12ch] font-display text-[2.5rem] font-extrabold leading-[0.95] tracking-headline min-[400px]:text-5xl sm:text-7xl">
               {contactContent.title}
             </h2>
-            <p className="mt-6 max-w-[44ch] text-lg leading-8 text-accent-ink/80">
+            <p className="mt-6 max-w-[44ch] text-base leading-7 text-accent-ink/80 sm:text-lg sm:leading-8">
               {contactContent.description}
             </p>
           </div>
 
-          <ul className="self-end border-b border-accent-ink/20">
+          <ul className="min-w-0 self-end border-b border-accent-ink/20">
             {channels.map(({ label, value, href, icon: Icon }) => (
               <li key={label} className="border-t border-accent-ink/20">
                 <a
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-5 py-6 focus-visible:outline-accent-ink"
+                  className="group flex items-center gap-4 py-5 focus-visible:outline-accent-ink sm:gap-5 sm:py-6"
                 >
                   <Icon
                     className="h-6 w-6 shrink-0 text-accent-ink/70"
@@ -66,7 +66,7 @@ export default function ContactSection() {
                     <span className="block text-sm text-accent-ink/70">
                       {label}
                     </span>
-                    <span className="mt-1 block break-words text-xl font-bold sm:text-2xl">
+                    <span className="mt-1 block text-lg font-bold [overflow-wrap:anywhere] sm:text-2xl">
                       {value}
                     </span>
                   </span>
