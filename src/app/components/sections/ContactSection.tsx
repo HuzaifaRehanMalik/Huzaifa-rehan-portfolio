@@ -40,11 +40,11 @@ export default function ContactSection() {
     <section id="contact" className="scroll-mt-24 px-4 pb-8 sm:px-8 lg:px-12">
       <Reveal>
         <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)] gap-10 overflow-hidden rounded-[32px] bg-accent px-5 py-12 text-accent-ink sm:gap-12 sm:px-10 sm:py-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16 lg:px-16 lg:py-20">
-          <div className="min-w-0">
-            <h2 className="max-w-[12ch] font-display text-[2.5rem] font-extrabold leading-[0.95] tracking-headline min-[400px]:text-5xl sm:text-7xl">
+          <div className="min-w-0 text-center lg:text-left">
+            <h2 className="mx-auto max-w-[12ch] font-display lg:mx-0 text-[2.5rem] font-extrabold leading-[0.95] tracking-headline min-[400px]:text-5xl sm:text-7xl">
               {contactContent.title}
             </h2>
-            <p className="mt-6 max-w-[44ch] text-base leading-7 text-accent-ink/80 sm:text-lg sm:leading-8">
+            <p className="mx-auto mt-6 max-w-[44ch] text-base lg:mx-0 leading-7 text-accent-ink/80 sm:text-lg sm:leading-8">
               {contactContent.description}
             </p>
           </div>
@@ -67,7 +67,16 @@ export default function ContactSection() {
                       {label}
                     </span>
                     <span className="mt-1 block text-lg font-bold [overflow-wrap:anywhere] sm:text-2xl">
-                      {value}
+                      {value.includes("@") ? (
+                        // Let a long email break after "@", not mid-word.
+                        <>
+                          {value.slice(0, value.indexOf("@") + 1)}
+                          <wbr />
+                          {value.slice(value.indexOf("@") + 1)}
+                        </>
+                      ) : (
+                        value
+                      )}
                     </span>
                   </span>
                   <FiArrowUpRight
