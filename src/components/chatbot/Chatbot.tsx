@@ -132,7 +132,7 @@ export default function Chatbot() {
           <header className="flex items-center justify-between border-b border-border px-4 py-3">
             <div>
               <p className="font-display text-base font-bold tracking-tight">Portfolio assistant</p>
-              <p className="text-xs text-text-dim">Answers from this portfolio's content</p>
+              <p className="text-xs text-text-dim">Answers from this portfolio&apos;s content</p>
             </div>
             <div className="flex items-center gap-1">
               <button
