@@ -3,6 +3,9 @@ export const siteUrl = (
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://huzaifa-rehan-portfolio.vercel.app"
 ).replace(/\/$/, "");
 
+// Bump by hand when content changes; a fresh date on every deploy teaches Google to ignore it.
+export const siteLastModified = "2026-11-07";
+
 export const siteTitle = "Huzaifa Rehan | Full-Stack AI Engineer & Next.js Developer";
 
 export const siteDescription =

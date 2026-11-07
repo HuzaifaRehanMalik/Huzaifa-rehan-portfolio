@@ -1,18 +1,19 @@
 import type { MetadataRoute } from "next";
-import { siteUrl } from "@/lib/site";
+import { profile } from "@/data/portfolio";
+import { siteLastModified, siteUrl } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: siteUrl,
-      lastModified: new Date(),
+      lastModified: siteLastModified,
       changeFrequency: "monthly",
       priority: 1,
-      images: [`${siteUrl}/mypic.jpg`],
+      images: [`${siteUrl}${profile.image}`],
     },
     {
       url: `${siteUrl}/cv.pdf`,
-      lastModified: new Date(),
+      lastModified: siteLastModified,
       changeFrequency: "yearly",
       priority: 0.6,
     },

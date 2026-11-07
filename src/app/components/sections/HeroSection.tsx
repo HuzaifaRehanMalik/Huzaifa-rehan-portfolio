@@ -6,6 +6,8 @@ import { FormEvent, useEffect, useState } from "react";
 import { FiArrowUpRight, FiDownload } from "react-icons/fi";
 import { footerBranding, profile } from "@/data/portfolio";
 import { askAssistant } from "@/lib/assistant";
+import Tilt from "@/components/Tilt";
+
 
 const starterQuestions = [
   "Which projects use RAG?",
@@ -206,7 +208,7 @@ export default function HeroSection() {
         </div>
 
         <figure className="relative mx-auto w-full max-w-[300px] animate-rise [animation-delay:300ms] sm:max-w-[340px] lg:ml-auto lg:mr-0 lg:max-w-[360px]">
-          <div className="animate-float">
+          <Tilt className="rounded-[30px]" max={6}>
             {/* Rotating cyan light around the photo frame */}
             <div className="photo-ring relative rounded-[30px] p-[2px] shadow-[0_30px_80px_-40px_rgba(88,213,219,0.55)]">
               <div className="relative overflow-hidden rounded-[28px] bg-surface">
@@ -216,10 +218,12 @@ export default function HeroSection() {
                   width={1254}
                   height={1254}
                   priority
+                  sizes="(min-width: 1024px) 360px, (min-width: 640px) 340px, 300px"
                   className="aspect-[4/5] w-full object-cover"
                 />
               </div>
             </div>
+          </Tilt>
             <figcaption className="absolute bottom-3 left-3 inline-flex items-center gap-2 rounded-full border border-border bg-bg/85 px-3.5 py-1.5 text-sm font-medium text-text backdrop-blur">
               <span
                 className="h-2 w-2 rounded-full bg-live"
@@ -227,7 +231,6 @@ export default function HeroSection() {
               />
               {footerBranding.status}
             </figcaption>
-          </div>
         </figure>
       </div>
     </section>

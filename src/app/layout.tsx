@@ -63,11 +63,6 @@ export const metadata: Metadata = {
   verification: process.env.GOOGLE_SITE_VERIFICATION
     ? { google: process.env.GOOGLE_SITE_VERIFICATION }
     : undefined,
-  icons: {
-    icon: "/logo.jpg",
-    shortcut: "/logo.jpg",
-    apple: "/logo.jpg",
-  },
 };
 
 export const viewport: Viewport = {
@@ -81,8 +76,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`scroll-smooth ${schibsted.variable} ${plexMono.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`scroll-smooth ${schibsted.variable} ${plexMono.variable}`}>
       <body className="bg-bg font-body text-text antialiased">
+        {/* Marks JS as available so scroll-reveal hiding never hides content from crawlers or no-JS users */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <Navebar />
         {children}
         <Footer />

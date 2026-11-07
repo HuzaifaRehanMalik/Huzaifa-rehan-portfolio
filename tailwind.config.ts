@@ -39,8 +39,9 @@ export default {
           to: { opacity: "1", transform: "translateY(0)" },
         },
         "word-rise": {
-          from: { opacity: "0", transform: "translateY(105%)" },
-          to: { opacity: "1", transform: "translateY(0)" },
+          // No opacity fade: transparent text delays LCP; the overflow mask hides it instead.
+          from: { transform: "translateY(105%)" },
+          to: { transform: "translateY(0)" },
         },
         drift: {
           "0%, 100%": { transform: "translate(0, 0) scale(1)" },

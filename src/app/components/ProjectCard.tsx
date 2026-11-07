@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { FiArrowUpRight, FiGithub } from "react-icons/fi";
 import type { Project } from "@/types/portfolio";
+import Tilt from "@/components/Tilt";
 
 interface ProjectCardProps {
   project: Project;
@@ -37,27 +38,30 @@ function ProjectLinks({ project }: { project: Project }) {
 
 export default function ProjectCard({ project, variant = "compact", flip = false }: ProjectCardProps) {
   const screenshot = (
+    <Tilt className="rounded-[20px]" max={variant === "featured" ? 4 : 6}>
     <a
       href={project.url}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`Open ${project.title} live site`}
-      className="group block overflow-hidden rounded-[20px] border border-border bg-surface"
+      className="group block overflow-hidden rounded-[20px] border border-border bg-surface shadow-[0_40px_80px_-50px_rgba(88,213,219,0.5)]"
     >
       <Image
         alt={`Screenshot of ${project.title}`}
         src={project.image}
         width={1200}
         height={750}
+        sizes={variant === "featured" ? "(min-width: 1024px) 60vw, 100vw" : "(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"}
         className="aspect-[16/10] w-full object-cover object-top transition duration-500 group-hover:scale-[1.02]"
       />
     </a>
+    </Tilt>
   );
 
   if (variant === "featured") {
     return (
       <article className="grid items-center gap-8 lg:grid-cols-[1.25fr_0.75fr] lg:gap-14">
-        <div className={flip ? "lg:order-2" : undefined}>{screenshot}</div>
+        <div className={`scroll-3d ${flip ? "lg:order-2" : ""}`}>{screenshot}</div>
         <div>
           <h3 className="font-display text-3xl font-extrabold leading-[1.05] tracking-headline text-text sm:text-4xl">
             {project.title}

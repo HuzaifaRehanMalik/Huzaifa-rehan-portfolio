@@ -6,7 +6,7 @@ import {
   services,
   socialLinks,
 } from "@/data/portfolio";
-import { siteDescription, siteUrl } from "@/lib/site";
+import { siteDescription, siteLastModified, siteUrl } from "@/lib/site";
 
 // schema.org JSON-LD so Google can show Huzaifa as a person/professional with linked profiles and work.
 export default function StructuredData() {
@@ -43,15 +43,18 @@ export default function StructuredData() {
         name: "Huzaifa Rehan, Full-Stack AI Engineer",
         isPartOf: { "@id": `${siteUrl}/#website` },
         mainEntity: { "@id": personId },
+        dateCreated: "2024-08-20",
+        dateModified: siteLastModified,
       },
       {
-        "@type": "ProfessionalService",
+        "@type": "Service",
         "@id": `${siteUrl}/#service`,
         name: "Huzaifa Rehan, AI & Full-Stack Development",
         url: siteUrl,
         image: `${siteUrl}${profile.image}`,
         description: siteDescription,
-        founder: { "@id": personId },
+        provider: { "@id": personId },
+        serviceType: "AI and full-stack web development",
         areaServed: "Worldwide",
         hasOfferCatalog: {
           "@type": "OfferCatalog",
@@ -74,13 +77,11 @@ export default function StructuredData() {
           "@type": "ListItem",
           position: index + 1,
           item: {
-            "@type": "SoftwareApplication",
+            "@type": "CreativeWork",
             name: project.title,
             description: project.description,
             url: project.url,
             image: `${siteUrl}${project.image}`,
-            applicationCategory: "WebApplication",
-            operatingSystem: "Web",
             author: { "@id": personId },
             keywords: project.techStack.join(", "),
             ...(project.repo ? { sameAs: project.repo } : {}),
