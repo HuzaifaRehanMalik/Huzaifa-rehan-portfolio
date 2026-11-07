@@ -129,26 +129,6 @@
   }
 }
 
-/* Featured screenshots start tilted back in 3D and straighten as they scroll into view.
-   CSS-only; browsers without scroll-driven animations just show them flat. */
-@supports (animation-timeline: view()) {
-  .scroll-3d {
-    transform-origin: center bottom;
-    animation: tilt-up linear both;
-    animation-timeline: view();
-    animation-range: entry 0% cover 45%;
-  }
-}
-
-@keyframes tilt-up {
-  from {
-    transform: perspective(1400px) rotateX(28deg) scale(0.9);
-  }
-  to {
-    transform: perspective(1400px) rotateX(0deg) scale(1);
-  }
-}
-
 @property --ring-angle {
   syntax: "<angle>";
   initial-value: 0deg;
@@ -167,8 +147,7 @@
     transform: none;
   }
 
-  .tilt-3d,
-  .scroll-3d {
+  .tilt-3d {
     transform: none !important;
     animation: none !important;
   }
