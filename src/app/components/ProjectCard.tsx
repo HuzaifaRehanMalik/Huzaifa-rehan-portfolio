@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { FiArrowUpRight, FiGithub } from "react-icons/fi";
 import type { Project } from "@/types/portfolio";
+import Tilt from "@/components/Tilt";
 
 interface ProjectCardProps {
   project: Project;
@@ -39,12 +40,15 @@ function ProjectLinks({ project }: { project: Project }) {
 
 export default function ProjectCard({ project, variant = "compact", flip = false }: ProjectCardProps) {
   const screenshot = (
+    <Tilt className="rounded-[20px]" max={6}>
+    {/* Same rotating cyan ring as the hero photo */}
+    <div className="photo-ring relative rounded-[20px] p-[2px] shadow-[0_40px_80px_-50px_rgba(88,213,219,0.5)]">
     <a
       href={project.url}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`Open ${project.title} live site`}
-      className="group block overflow-hidden rounded-[20px] border border-border bg-surface shadow-[0_40px_80px_-50px_rgba(88,213,219,0.5)]"
+      className="group relative block overflow-hidden rounded-[18px] bg-surface"
     >
       <Image
         alt={`Screenshot of ${project.title}`}
@@ -55,6 +59,8 @@ export default function ProjectCard({ project, variant = "compact", flip = false
         className="aspect-[16/10] w-full object-cover object-top transition duration-500 group-hover:scale-[1.02]"
       />
     </a>
+    </div>
+    </Tilt>
   );
 
   if (variant === "featured") {
