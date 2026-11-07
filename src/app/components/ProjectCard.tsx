@@ -19,6 +19,7 @@ function ProjectLinks({ project }: { project: Project }) {
         className="inline-flex items-center gap-1.5 rounded-full bg-text px-5 py-2.5 text-sm font-semibold text-bg transition hover:bg-accent hover:text-accent-ink"
       >
         Visit live site
+        <span className="sr-only"> of {project.title}</span>
         <FiArrowUpRight aria-hidden="true" />
       </a>
       {project.repo ? (
@@ -30,6 +31,7 @@ function ProjectLinks({ project }: { project: Project }) {
         >
           <FiGithub aria-hidden="true" />
           View code
+          <span className="sr-only"> for {project.title}</span>
         </a>
       ) : null}
     </div>

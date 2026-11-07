@@ -6,8 +6,8 @@ const technologies = Array.from(
 
 export default function TechMarquee() {
   return (
-    <div className="marquee-mask group overflow-hidden border-y border-border-soft py-5" aria-label="Technologies I work with">
-      <ul className="flex w-max animate-marquee gap-10 group-hover:[animation-play-state:paused]">
+    <div className="marquee-mask group overflow-hidden border-y border-border-soft py-5">
+      <ul aria-label="Technologies I work with" className="flex w-max animate-marquee gap-10 group-hover:[animation-play-state:paused]">
         {[...technologies, ...technologies].map((tech, index) => (
           <li
             key={`${tech}-${index}`}

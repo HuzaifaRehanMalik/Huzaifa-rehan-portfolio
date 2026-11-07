@@ -63,6 +63,11 @@ export const metadata: Metadata = {
   verification: process.env.GOOGLE_SITE_VERIFICATION
     ? { google: process.env.GOOGLE_SITE_VERIFICATION }
     : undefined,
+  icons: {
+    icon: "/logo.jpg",
+    shortcut: "/logo.jpg",
+    apple: "/logo.jpg",
+  },
 };
 
 export const viewport: Viewport = {

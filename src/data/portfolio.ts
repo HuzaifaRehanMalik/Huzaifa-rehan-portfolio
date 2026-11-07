@@ -83,7 +83,7 @@ export const expertiseCategories: ExpertiseCategory[] = [
 export const servicesContent = {
   title: "What I can build for you",
   description:
-    "I help teams and founders turn modern web interfaces, AI workflows, and business data into practical products that are fast, useful, and ready to grow.",
+    "I help teams and founders turn modern web interfaces, AI workflows, and business data into practical products, from AI chatbots and RAG systems to Next.js web apps that are fast, useful, and ready to grow.",
 } as const;
 
 export const services: Service[] = [
@@ -196,7 +196,7 @@ export const projects: Project[] = [
 
 export const projectsContent = {
   title: "Selected projects",
-  intro: "Live products with their source code, from a production inventory SaaS to apps with real AI features.",
+  intro: "Live Next.js and AI products with their source code, from a production inventory SaaS to apps with RAG-powered AI chatbots.",
 } as const;
 
 export const contactContent = {
